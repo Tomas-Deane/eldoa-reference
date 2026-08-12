@@ -14,34 +14,32 @@ type Pose = {
   common?: boolean;
 };
 
-const cervicalVideo = "https://www.youtube.com/watch?v=nmULdffJCqs";
-const thoracicVideo = "https://www.youtube.com/watch?v=6WU4pFxIch8";
-const lumbarVideo = "https://www.youtube.com/watch?v=7WHaHBDDi-g";
+const nwfVideo = (id: string) => `https://nwfeldoaonlinemembers.vhx.tv/nwf-eldoa-exercises/videos/${id}`;
 
 const poses: Pose[] = [
-  { id: "c2-c3", upper: "C2", lower: "C3", region: "cervical", image: "/poses/c2-c3.avif", video: cervicalVideo },
-  { id: "c3-c4", upper: "C3", lower: "C4", region: "cervical", image: "/poses/c3-c4.avif", video: cervicalVideo },
-  { id: "c4-c5", upper: "C4", lower: "C5", region: "cervical", image: "/poses/c4-c5.avif", video: cervicalVideo, common: true },
-  { id: "c5-c6", upper: "C5", lower: "C6", region: "cervical", video: cervicalVideo },
-  { id: "c6-c7", upper: "C6", lower: "C7", region: "cervical", image: "/poses/c6-c7.avif", video: cervicalVideo },
-  { id: "c7-t1", upper: "C7", lower: "T1", region: "cervical", image: "/poses/c7-t1.avif", video: cervicalVideo, common: true },
-  { id: "t1-t2", upper: "T1", lower: "T2", region: "thoracic", image: "/poses/t1-t2.avif", video: thoracicVideo, common: true },
-  { id: "t2-t3", upper: "T2", lower: "T3", region: "thoracic", image: "/poses/t2-t3.avif", video: thoracicVideo },
-  { id: "t3-t4", upper: "T3", lower: "T4", region: "thoracic", image: "/poses/t3-t4.avif", video: thoracicVideo },
-  { id: "t4-t5", upper: "T4", lower: "T5", region: "thoracic", image: "/poses/t4-t5.avif", video: thoracicVideo, common: true },
-  { id: "t5-t6", upper: "T5", lower: "T6", region: "thoracic", image: "/poses/t5-t6.avif", video: thoracicVideo },
-  { id: "t6-t7", upper: "T6", lower: "T7", region: "thoracic", image: "/poses/t6-t7.avif", video: "https://www.youtube.com/shorts/Te1jCDxOU48", common: true },
-  { id: "t7-t8", upper: "T7", lower: "T8", region: "thoracic", image: "/poses/t7-t8.avif", video: thoracicVideo },
-  { id: "t8-t9", upper: "T8", lower: "T9", region: "thoracic", image: "/poses/t8-t9.avif", video: "https://www.youtube.com/shorts/GJBTL9XExlw", common: true },
-  { id: "t9-t10", upper: "T9", lower: "T10", region: "thoracic", image: "/poses/t9-t10.avif", video: thoracicVideo },
-  { id: "t10-t11", upper: "T10", lower: "T11", region: "thoracic", image: "/poses/t10-t11.avif", video: thoracicVideo },
-  { id: "t11-t12", upper: "T11", lower: "T12", region: "thoracic", image: "/poses/t11-t12.avif", video: thoracicVideo },
-  { id: "t12-l1", upper: "T12", lower: "L1", region: "thoracic", image: "/poses/t12-l1.avif", video: thoracicVideo, common: true },
-  { id: "l1-l2", upper: "L1", lower: "L2", region: "lumbar", image: "/poses/l1-l2.avif", video: lumbarVideo },
-  { id: "l2-l3", upper: "L2", lower: "L3", region: "lumbar", image: "/poses/l2-l3.avif", video: lumbarVideo },
-  { id: "l3-l4", upper: "L3", lower: "L4", region: "lumbar", image: "/poses/l3-l4.avif", video: lumbarVideo, common: true },
-  { id: "l4-l5", upper: "L4", lower: "L5", region: "lumbar", image: "/poses/l4-l5.avif", video: "https://www.youtube.com/shorts/8RVdXDPibEM", common: true },
-  { id: "l5-s1", upper: "L5", lower: "S1", region: "lumbar", image: "/poses/l5-s1.avif", video: "https://www.youtube.com/shorts/_llRn7zImh8", common: true },
+  { id: "c2-c3", upper: "C2", lower: "C3", region: "cervical", image: "/poses/c2-c3.avif", video: nwfVideo("c2-c3") },
+  { id: "c3-c4", upper: "C3", lower: "C4", region: "cervical", image: "/poses/c3-c4.avif", video: nwfVideo("c3-c4") },
+  { id: "c4-c5", upper: "C4", lower: "C5", region: "cervical", image: "/poses/c4-c5.avif", video: nwfVideo("c4-c5"), common: true },
+  { id: "c5-c6", upper: "C5", lower: "C6", region: "cervical", video: nwfVideo("c5-c6") },
+  { id: "c6-c7", upper: "C6", lower: "C7", region: "cervical", image: "/poses/c6-c7.avif", video: nwfVideo("c6-c7") },
+  { id: "c7-t1", upper: "C7", lower: "T1", region: "cervical", image: "/poses/c7-t1.avif", video: nwfVideo("c7-t1"), common: true },
+  { id: "t1-t2", upper: "T1", lower: "T2", region: "thoracic", image: "/poses/t1-t2.avif", video: nwfVideo("t1-t2"), common: true },
+  { id: "t2-t3", upper: "T2", lower: "T3", region: "thoracic", image: "/poses/t2-t3.avif", video: nwfVideo("t2-t3") },
+  { id: "t3-t4", upper: "T3", lower: "T4", region: "thoracic", image: "/poses/t3-t4.avif", video: nwfVideo("t3-t4") },
+  { id: "t4-t5", upper: "T4", lower: "T5", region: "thoracic", image: "/poses/t4-t5.avif", video: nwfVideo("t4-t5"), common: true },
+  { id: "t5-t6", upper: "T5", lower: "T6", region: "thoracic", image: "/poses/t5-t6.avif", video: nwfVideo("t5-t6") },
+  { id: "t6-t7", upper: "T6", lower: "T7", region: "thoracic", image: "/poses/t6-t7.avif", video: nwfVideo("t6-t7"), common: true },
+  { id: "t7-t8", upper: "T7", lower: "T8", region: "thoracic", image: "/poses/t7-t8.avif", video: nwfVideo("t7-t8") },
+  { id: "t8-t9", upper: "T8", lower: "T9", region: "thoracic", image: "/poses/t8-t9.avif", video: nwfVideo("t8-t9"), common: true },
+  { id: "t9-t10", upper: "T9", lower: "T10", region: "thoracic", image: "/poses/t9-t10.avif", video: nwfVideo("t9-t10") },
+  { id: "t10-t11", upper: "T10", lower: "T11", region: "thoracic", image: "/poses/t10-t11.avif", video: nwfVideo("t10-t11") },
+  { id: "t11-t12", upper: "T11", lower: "T12", region: "thoracic", image: "/poses/t11-t12.avif", video: nwfVideo("t11-t12") },
+  { id: "t12-l1", upper: "T12", lower: "L1", region: "thoracic", image: "/poses/t12-l1.avif", video: nwfVideo("t12-l1"), common: true },
+  { id: "l1-l2", upper: "L1", lower: "L2", region: "lumbar", image: "/poses/l1-l2.avif", video: nwfVideo("l1-l2") },
+  { id: "l2-l3", upper: "L2", lower: "L3", region: "lumbar", image: "/poses/l2-l3.avif", video: nwfVideo("l2-l3") },
+  { id: "l3-l4", upper: "L3", lower: "L4", region: "lumbar", image: "/poses/l3-l4.avif", video: nwfVideo("l3-l4"), common: true },
+  { id: "l4-l5", upper: "L4", lower: "L5", region: "lumbar", image: "/poses/l4-l5.avif", video: nwfVideo("l4-l5"), common: true },
+  { id: "l5-s1", upper: "L5", lower: "S1", region: "lumbar", image: "/poses/l5-s1.avif", video: nwfVideo("l5-s1"), common: true },
 ];
 
 const extendedReferences = [
@@ -143,7 +141,7 @@ export default function Home() {
 
               <div className="pose-footer">
                 <p>Final position reference</p>
-                <a href={pose.video} target="_blank" rel="noreferrer">YouTube technique ↗</a>
+                <a href={pose.video} target="_blank" rel="noreferrer">NWF exercise video ↗</a>
               </div>
             </article>
           ))}

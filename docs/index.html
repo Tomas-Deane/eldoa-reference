@@ -30,16 +30,16 @@
     </section>
   </main>
   <script>
-    const C='https://www.youtube.com/watch?v=nmULdffJCqs', T='https://www.youtube.com/watch?v=6WU4pFxIch8', L='https://www.youtube.com/watch?v=7WHaHBDDi-g';
+    const N=id=>`https://nwfeldoaonlinemembers.vhx.tv/nwf-eldoa-exercises/videos/${id}`;
     const poses = [
-      ['c2-c3','C2','C3','cervical',C],['c3-c4','C3','C4','cervical',C],['c4-c5','C4','C5','cervical',C,1],
-      ['c5-c6','C5','C6','cervical',C],['c6-c7','C6','C7','cervical',C],['c7-t1','C7','T1','cervical',C,1],
-      ['t1-t2','T1','T2','thoracic',T,1],['t2-t3','T2','T3','thoracic',T],['t3-t4','T3','T4','thoracic',T],
-      ['t4-t5','T4','T5','thoracic',T,1],['t5-t6','T5','T6','thoracic',T],['t6-t7','T6','T7','thoracic','https://www.youtube.com/shorts/Te1jCDxOU48',1],
-      ['t7-t8','T7','T8','thoracic',T],['t8-t9','T8','T9','thoracic','https://www.youtube.com/shorts/GJBTL9XExlw',1],['t9-t10','T9','T10','thoracic',T],
-      ['t10-t11','T10','T11','thoracic',T],['t11-t12','T11','T12','thoracic',T],['t12-l1','T12','L1','thoracic',T,1],
-      ['l1-l2','L1','L2','lumbar',L],['l2-l3','L2','L3','lumbar',L],['l3-l4','L3','L4','lumbar',L,1],
-      ['l4-l5','L4','L5','lumbar','https://www.youtube.com/shorts/8RVdXDPibEM',1],['l5-s1','L5','S1','lumbar','https://www.youtube.com/shorts/_llRn7zImh8',1]
+      ['c2-c3','C2','C3','cervical',N('c2-c3')],['c3-c4','C3','C4','cervical',N('c3-c4')],['c4-c5','C4','C5','cervical',N('c4-c5'),1],
+      ['c5-c6','C5','C6','cervical',N('c5-c6')],['c6-c7','C6','C7','cervical',N('c6-c7')],['c7-t1','C7','T1','cervical',N('c7-t1'),1],
+      ['t1-t2','T1','T2','thoracic',N('t1-t2'),1],['t2-t3','T2','T3','thoracic',N('t2-t3')],['t3-t4','T3','T4','thoracic',N('t3-t4')],
+      ['t4-t5','T4','T5','thoracic',N('t4-t5'),1],['t5-t6','T5','T6','thoracic',N('t5-t6')],['t6-t7','T6','T7','thoracic',N('t6-t7'),1],
+      ['t7-t8','T7','T8','thoracic',N('t7-t8')],['t8-t9','T8','T9','thoracic',N('t8-t9'),1],['t9-t10','T9','T10','thoracic',N('t9-t10')],
+      ['t10-t11','T10','T11','thoracic',N('t10-t11')],['t11-t12','T11','T12','thoracic',N('t11-t12')],['t12-l1','T12','L1','thoracic',N('t12-l1'),1],
+      ['l1-l2','L1','L2','lumbar',N('l1-l2')],['l2-l3','L2','L3','lumbar',N('l2-l3')],['l3-l4','L3','L4','lumbar',N('l3-l4'),1],
+      ['l4-l5','L4','L5','lumbar',N('l4-l5'),1],['l5-s1','L5','S1','lumbar',N('l5-s1'),1]
     ];
     const filters=['All 23','Common 10','Cervical','Thoracic','Lumbar']; let filter='All 23', observer;
     const extra=[
@@ -65,7 +65,7 @@
       document.querySelector('.sequence').innerHTML=shown.map((p,i)=>`<article class="pose" id="${p[0]}">
         <div class="pose-heading"><span class="count">${String(i+1).padStart(2,'0')} / ${String(shown.length).padStart(2,'0')}</span><div><p class="region">${p[3]}</p><h2>${p[1]}<span>—</span>${p[2]}</h2></div><span class="minute">1:00</span></div>
         <div class="position-frame ${p[0]==='c5-c6'?'missing':''}">${p[0]==='c5-c6'?`<div class="missing-copy"><span>REFERENCE NEEDED</span><strong>C5—C6</strong><p>No still was present in the otherwise complete source set.</p></div>`:`<img src="poses/${p[0]}.avif" alt="Final position reference for ${p[1]}–${p[2]} ELDOA">`}<div class="target-tag"><i></i> TARGET&nbsp; ${p[1]}—${p[2]}</div></div>
-        <div class="pose-footer"><p>Final position reference</p><a href="${p[4]}" target="_blank" rel="noreferrer">YouTube technique ↗</a></div>
+        <div class="pose-footer"><p>Final position reference</p><a href="${p[4]}" target="_blank" rel="noreferrer">NWF exercise video ↗</a></div>
       </article>`).join('');
       document.querySelector('.vertebrae').innerHTML=shown.map(p=>`<button data-jump="${p[0]}" aria-label="Jump to ${p[1]}–${p[2]}"><span class="bone">${p[1]}</span><span class="disc"></span><span class="pair">${p[1]}—${p[2]}</span></button>`).join('')+`<div class="last-bone">${shown.at(-1)[2]}</div>`;
       document.querySelectorAll('[data-filter]').forEach(b=>b.onclick=()=>{filter=b.dataset.filter;render();scrollTo({top:document.querySelector('.filters').offsetTop,behavior:'smooth'})});
