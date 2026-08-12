@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ELDOA — Spinal Index</title>
   <meta name="description" content="A fast visual reference for the spinal ELDOA sequence from C2/C3 to L5/S1.">
-  <link rel="stylesheet" href="app/globals.css">
+  <link rel="stylesheet" href="../app/globals.css">
 </head>
 <body>
   <main>
@@ -43,7 +43,7 @@
       document.querySelector('.filters').innerHTML=filters.map(f=>`<button class="${f===filter?'selected':''}" data-filter="${f}">${f}</button>`).join('');
       document.querySelector('.sequence').innerHTML=shown.map((p,i)=>`<article class="pose" id="${p[0]}">
         <div class="pose-heading"><span class="count">${String(i+1).padStart(2,'0')} / ${String(shown.length).padStart(2,'0')}</span><div><p class="region">${p[3]}</p><h2>${p[1]}<span>—</span>${p[2]}</h2></div><span class="minute">1:00</span></div>
-        <div class="position-frame ${p[0]==='c5-c6'?'missing':''}">${p[0]==='c5-c6'?`<div class="missing-copy"><span>REFERENCE NEEDED</span><strong>C5—C6</strong><p>No still was present in the otherwise complete source set.</p></div>`:`<img src="public/poses/${p[0]}.avif" alt="Final position reference for ${p[1]}–${p[2]} ELDOA">`}<div class="target-tag"><i></i> TARGET&nbsp; ${p[1]}—${p[2]}</div></div>
+        <div class="position-frame ${p[0]==='c5-c6'?'missing':''}">${p[0]==='c5-c6'?`<div class="missing-copy"><span>REFERENCE NEEDED</span><strong>C5—C6</strong><p>No still was present in the otherwise complete source set.</p></div>`:`<img src="../public/poses/${p[0]}.avif" alt="Final position reference for ${p[1]}–${p[2]} ELDOA">`}<div class="target-tag"><i></i> TARGET&nbsp; ${p[1]}—${p[2]}</div></div>
         <div class="pose-footer"><p>Final position reference</p><a href="${p[4]}" target="_blank" rel="noreferrer">YouTube technique ↗</a></div>
       </article>`).join('');
       document.querySelector('.vertebrae').innerHTML=shown.map(p=>`<button data-jump="${p[0]}" aria-label="Jump to ${p[1]}–${p[2]}"><span class="bone">${p[1]}</span><span class="disc"></span><span class="pair">${p[1]}—${p[2]}</span></button>`).join('')+`<div class="last-bone">${shown.at(-1)[2]}</div>`;
