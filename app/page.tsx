@@ -44,6 +44,23 @@ const poses: Pose[] = [
   { id: "l5-s1", upper: "L5", lower: "S1", region: "lumbar", image: "/poses/l5-s1.avif", video: "https://www.youtube.com/shorts/_llRn7zImh8", common: true },
 ];
 
+const extendedReferences = [
+  { level: 3, group: "Hip", name: "Hip joint · internal rotation", video: "https://www.youtube.com/watch?v=Oi2EEDXa0Dg", source: "Visual explanation" },
+  { level: 3, group: "Hip", name: "Hip joint · external rotation", video: "https://www.youtube.com/watch?v=nW2qieeS2aI", source: "Position demonstration" },
+  { level: 3, group: "Hip", name: "Hip joint · general", video: "https://www.youtube.com/watch?v=qAnc5YfvYKc", source: "Position demonstration" },
+  { level: 3, group: "Shoulder", name: "Shoulder girdle · multi-joint", video: "https://www.youtube.com/watch?v=QzkBCacMqv0", source: "Full class" },
+  { level: 3, group: "Shoulder", name: "Scapular ELDOA", video: "https://www.youtube.com/shorts/KmUzBqkMUpU", source: "Short demonstration" },
+  { level: 3, group: "Rib", name: "Rib 6", video: "https://www.youtube.com/watch?v=TY1ib5tCkww", source: "Position demonstration" },
+  { level: 3, group: "Rib", name: "Rib 8", video: "https://www.youtube.com/watch?v=2XywEIqyEJc", source: "Position demonstration" },
+  { level: 3, group: "Rib", name: "Rib 10", video: "https://www.youtube.com/watch?v=9T-EDHVzFdM", source: "Position demonstration" },
+  { level: 4, group: "Pelvis", name: "General SI joint", video: "https://www.youtube.com/watch?v=GJXN4voK8oQ", source: "Position demonstration" },
+  { level: 4, group: "Pelvis", name: "SI joint normalization", video: "https://www.youtube.com/watch?v=mK4j4K0b8kM", source: "Full class" },
+  { level: 4, group: "Pelvis", name: "Sacroiliac sequence", video: "https://www.youtube.com/watch?v=OMS-d1ZOdSQ", source: "Sequence demonstration" },
+  { level: 5, group: "Upper cervical", name: "C0—C1—C2", video: "https://www.youtube.com/watch?v=3fBe9Q8Y3Ek", source: "Visual explanation" },
+  { level: 5, group: "Upper cervical", name: "C1—C2", video: "https://www.youtube.com/watch?v=mpPJDI4hddA", source: "Position demonstration" },
+  { level: 5, group: "TMJ", name: "Temporomandibular joint", video: "https://www.youtube.com/watch?v=OAJ5Xc7LdH8", source: "Assessment + ELDOA" },
+] as const;
+
 const filters = ["All 23", "Common 10", "Cervical", "Thoracic", "Lumbar"] as const;
 type Filter = (typeof filters)[number];
 
@@ -151,6 +168,36 @@ export default function Home() {
           <p className="level-note">LEVEL 2<br /><span>Spine · L5/S1 to C2/C3</span></p>
         </aside>
       </div>
+
+      <section className="extended" id="levels-3-5">
+        <div className="extended-heading">
+          <div>
+            <p className="eyebrow">LEVELS 3—5 / VIDEO INDEX</p>
+            <h3>Beyond<br />the spine.</h3>
+          </div>
+          <p className="extended-intro">Confirmed ELDOA demonstrations. Each blank is ready for a final-position screenshot from the linked video.</p>
+        </div>
+        <div className="reference-grid">
+          {extendedReferences.map((item, index) => (
+            <article className={`reference-card ${item.group === "TMJ" ? "featured" : ""}`} key={item.name}>
+              <div className="reference-blank">
+                <span>SCREENSHOT NEEDED</span>
+                <b>{String(index + 1).padStart(2, "0")}</b>
+              </div>
+              <div className="reference-meta">
+                <p>LEVEL {item.level} · {item.group}</p>
+                <h4>{item.name}</h4>
+                <div><span>{item.source}</span><a href={item.video} target="_blank" rel="noreferrer">Open video ↗</a></div>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div className="unconfirmed">
+          <span>NOT YET CONFIRMED</span>
+          <p>Level 4 · Pubic symphysis</p>
+          <p>Level 6 · Cranial-bone ELDOA positions</p>
+        </div>
+      </section>
     </main>
   );
 }

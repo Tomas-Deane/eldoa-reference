@@ -23,6 +23,11 @@
         <p class="level-note">LEVEL 2<br><span>Spine · L5/S1 to C2/C3</span></p>
       </aside>
     </div>
+    <section class="extended" id="levels-3-5">
+      <div class="extended-heading"><div><p class="eyebrow">LEVELS 3—5 / VIDEO INDEX</p><h3>Beyond<br>the spine.</h3></div><p class="extended-intro">Confirmed ELDOA demonstrations. Each blank is ready for a final-position screenshot from the linked video.</p></div>
+      <div class="reference-grid"></div>
+      <div class="unconfirmed"><span>NOT YET CONFIRMED</span><p>Level 4 · Pubic symphysis</p><p>Level 6 · Cranial-bone ELDOA positions</p></div>
+    </section>
   </main>
   <script>
     const C='https://www.youtube.com/watch?v=nmULdffJCqs', T='https://www.youtube.com/watch?v=6WU4pFxIch8', L='https://www.youtube.com/watch?v=7WHaHBDDi-g';
@@ -37,6 +42,22 @@
       ['l4-l5','L4','L5','lumbar','https://www.youtube.com/shorts/8RVdXDPibEM',1],['l5-s1','L5','S1','lumbar','https://www.youtube.com/shorts/_llRn7zImh8',1]
     ];
     const filters=['All 23','Common 10','Cervical','Thoracic','Lumbar']; let filter='All 23', observer;
+    const extra=[
+      [3,'Hip','Hip joint · internal rotation','https://www.youtube.com/watch?v=Oi2EEDXa0Dg','Visual explanation'],
+      [3,'Hip','Hip joint · external rotation','https://www.youtube.com/watch?v=nW2qieeS2aI','Position demonstration'],
+      [3,'Hip','Hip joint · general','https://www.youtube.com/watch?v=qAnc5YfvYKc','Position demonstration'],
+      [3,'Shoulder','Shoulder girdle · multi-joint','https://www.youtube.com/watch?v=QzkBCacMqv0','Full class'],
+      [3,'Shoulder','Scapular ELDOA','https://www.youtube.com/shorts/KmUzBqkMUpU','Short demonstration'],
+      [3,'Rib','Rib 6','https://www.youtube.com/watch?v=TY1ib5tCkww','Position demonstration'],
+      [3,'Rib','Rib 8','https://www.youtube.com/watch?v=2XywEIqyEJc','Position demonstration'],
+      [3,'Rib','Rib 10','https://www.youtube.com/watch?v=9T-EDHVzFdM','Position demonstration'],
+      [4,'Pelvis','General SI joint','https://www.youtube.com/watch?v=GJXN4voK8oQ','Position demonstration'],
+      [4,'Pelvis','SI joint normalization','https://www.youtube.com/watch?v=mK4j4K0b8kM','Full class'],
+      [4,'Pelvis','Sacroiliac sequence','https://www.youtube.com/watch?v=OMS-d1ZOdSQ','Sequence demonstration'],
+      [5,'Upper cervical','C0—C1—C2','https://www.youtube.com/watch?v=3fBe9Q8Y3Ek','Visual explanation'],
+      [5,'Upper cervical','C1—C2','https://www.youtube.com/watch?v=mpPJDI4hddA','Position demonstration'],
+      [5,'TMJ','Temporomandibular joint','https://www.youtube.com/watch?v=OAJ5Xc7LdH8','Assessment + ELDOA']
+    ];
     const list=()=>poses.filter(p=>filter==='Common 10'?p[5]:['Cervical','Thoracic','Lumbar'].includes(filter)?p[3]===filter.toLowerCase():true);
     function render(){
       const shown=list();
@@ -52,6 +73,7 @@
       observer?.disconnect(); observer=new IntersectionObserver(entries=>{const e=entries.filter(x=>x.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];if(!e)return;document.querySelectorAll('.vertebrae button').forEach(b=>b.classList.toggle('active',b.dataset.jump===e.target.id));const p=poses.find(x=>x[0]===e.target.id);document.querySelector('.current strong').textContent=p[1]+'—'+p[2]},{rootMargin:'-25% 0px -55% 0px',threshold:[.05,.35,.7]});
       shown.forEach(p=>observer.observe(document.getElementById(p[0])));
     }
+    document.querySelector('.reference-grid').innerHTML=extra.map((x,i)=>`<article class="reference-card ${x[1]==='TMJ'?'featured':''}"><div class="reference-blank"><span>SCREENSHOT NEEDED</span><b>${String(i+1).padStart(2,'0')}</b></div><div class="reference-meta"><p>LEVEL ${x[0]} · ${x[1]}</p><h4>${x[2]}</h4><div><span>${x[4]}</span><a href="${x[3]}" target="_blank" rel="noreferrer">Open video ↗</a></div></div></article>`).join('');
     render();
   </script>
 </body>
