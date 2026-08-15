@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 type Region = "cervical" | "thoracic" | "lumbar";
 
@@ -16,19 +16,30 @@ type Pose = {
 
 const nwfVideo = (id: string) => `https://nwfeldoaonlinemembers.vhx.tv/nwf-eldoa-exercises/videos/${id}`;
 
-const spineMap: Record<string, { y: number; h: number }> = {
-  "c2-c3": { y: 6.1, h: 4.3 }, "c3-c4": { y: 8.7, h: 4.3 },
-  "c4-c5": { y: 11.3, h: 4.3 }, "c5-c6": { y: 14.0, h: 4.3 },
-  "c6-c7": { y: 16.6, h: 4.3 }, "c7-t1": { y: 18.6, h: 4.8 },
-  "t1-t2": { y: 21.3, h: 5.2 }, "t2-t3": { y: 24.1, h: 5.4 },
-  "t3-t4": { y: 27.8, h: 5.8 }, "t4-t5": { y: 30.8, h: 5.8 },
-  "t5-t6": { y: 34.2, h: 5.8 }, "t6-t7": { y: 37.7, h: 6.0 },
-  "t7-t8": { y: 42.0, h: 6.5 }, "t8-t9": { y: 45.8, h: 6.5 },
-  "t9-t10": { y: 49.8, h: 6.5 }, "t10-t11": { y: 53.4, h: 6.5 },
-  "t11-t12": { y: 57.4, h: 6.5 }, "t12-l1": { y: 61.2, h: 7.0 },
-  "l1-l2": { y: 65.4, h: 7.5 }, "l2-l3": { y: 69.4, h: 7.8 },
-  "l3-l4": { y: 74.0, h: 8.0 }, "l4-l5": { y: 79.3, h: 8.8 },
-  "l5-s1": { y: 84.4, h: 9.2 },
+const spineMap: Record<string, { y: number; parts: [string, string, string] }> = {
+  "c2-c3": { y: 6.1, parts: ["path52", "rect48", "path54"] },
+  "c3-c4": { y: 8.7, parts: ["path54", "rect46", "path56"] },
+  "c4-c5": { y: 11.4, parts: ["path56", "rect44", "path58"] },
+  "c5-c6": { y: 13.8, parts: ["path58", "path42", "path60"] },
+  "c6-c7": { y: 16.6, parts: ["path60", "path40", "path62"] },
+  "c7-t1": { y: 18.8, parts: ["path62", "path38", "path64"] },
+  "t1-t2": { y: 21.6, parts: ["path64", "path26", "path66"] },
+  "t2-t3": { y: 24.4, parts: ["path66", "path36", "path68"] },
+  "t3-t4": { y: 27.4, parts: ["path68", "path34", "path70"] },
+  "t4-t5": { y: 30.6, parts: ["path70", "path32", "path72"] },
+  "t5-t6": { y: 34.0, parts: ["path72", "path30", "path74"] },
+  "t6-t7": { y: 38.1, parts: ["path74", "path28", "path76"] },
+  "t7-t8": { y: 42.0, parts: ["path76", "rect24", "path78"] },
+  "t8-t9": { y: 45.9, parts: ["path78", "rect22", "path80"] },
+  "t9-t10": { y: 50.0, parts: ["path80", "rect20", "path82"] },
+  "t10-t11": { y: 53.6, parts: ["path82", "rect18", "path84"] },
+  "t11-t12": { y: 57.2, parts: ["path84", "rect16", "path86"] },
+  "t12-l1": { y: 61.1, parts: ["path86", "rect14", "path88"] },
+  "l1-l2": { y: 65.2, parts: ["path88", "rect12", "path90"] },
+  "l2-l3": { y: 69.6, parts: ["path90", "rect10", "path92"] },
+  "l3-l4": { y: 74.5, parts: ["path92", "rect8", "path94"] },
+  "l4-l5": { y: 79.4, parts: ["path94", "rect6", "path96"] },
+  "l5-s1": { y: 83.7, parts: ["path96", "rect4", "path98"] },
 };
 
 const poses: Pose[] = [
@@ -80,6 +91,8 @@ type Filter = (typeof filters)[number];
 export default function Home() {
   const [filter, setFilter] = useState<Filter>("All 23");
   const [active, setActive] = useState("c2-c3");
+  const [spineReady, setSpineReady] = useState(0);
+  const spineObject = useRef<HTMLObjectElement>(null);
 
   const visible = useMemo(() => poses.filter((pose) => {
     if (filter === "Common 10") return pose.common;
@@ -92,6 +105,27 @@ export default function Home() {
   useEffect(() => {
     setActive(visible[0]?.id ?? "");
   }, [visible]);
+
+  useEffect(() => {
+    const document = spineObject.current?.contentDocument;
+    if (!document) return;
+
+    document.querySelectorAll("[data-spine-active]").forEach((element) => {
+      const part = element as SVGElement;
+      part.style.fill = "#999999";
+      part.style.filter = "";
+      part.removeAttribute("data-spine-active");
+    });
+
+    spineMap[active]?.parts.forEach((id) => {
+      const part = document.getElementById(id) as SVGElement | null;
+      if (!part) return;
+      part.setAttribute("data-spine-active", "true");
+      part.style.fill = "#f04a2f";
+      part.style.filter = "drop-shadow(0 0 6px rgba(240,74,47,.48))";
+      part.style.transition = "fill .2s ease, filter .2s ease";
+    });
+  }, [active, spineReady]);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -107,8 +141,6 @@ export default function Home() {
   }, [visible]);
 
   const jump = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "center" });
-  const activeSpine = spineMap[active] ?? spineMap["c2-c3"];
-
   return (
     <main>
       <header className="masthead">
@@ -169,13 +201,13 @@ export default function Home() {
             <strong>{poses.find((pose) => pose.id === active)?.upper}—{poses.find((pose) => pose.id === active)?.lower}</strong>
           </div>
           <div className="spine-figure" aria-label="Interactive lateral view of the human spine">
-            <img className="spine-anatomy" src="/spine-lateral.svg" alt="Human vertebral column, lateral view" />
-            <img
-              className="spine-anatomy spine-anatomy-active"
-              src="/spine-lateral.svg"
-              alt=""
-              aria-hidden="true"
-              style={{ clipPath: `inset(${Math.max(0, activeSpine.y - activeSpine.h / 2)}% 0 ${Math.max(0, 100 - activeSpine.y - activeSpine.h / 2)}% 0)` }}
+            <object
+              ref={spineObject}
+              className="spine-anatomy"
+              data="/spine-lateral.svg"
+              type="image/svg+xml"
+              aria-label="Human vertebral column, lateral view"
+              onLoad={() => setSpineReady((value) => value + 1)}
             />
             {visible.map((pose) => (
               <button
