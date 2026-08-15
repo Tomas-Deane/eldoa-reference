@@ -112,17 +112,19 @@ export default function Home() {
 
     document.querySelectorAll("[data-spine-active]").forEach((element) => {
       const part = element as SVGElement;
-      part.style.fill = "#999999";
+      part.style.fill = "#8f817d";
       part.style.filter = "";
       part.removeAttribute("data-spine-active");
     });
 
-    spineMap[active]?.parts.forEach((id) => {
+    spineMap[active]?.parts.forEach((id, index) => {
       const part = document.getElementById(id) as SVGElement | null;
       if (!part) return;
       part.setAttribute("data-spine-active", "true");
-      part.style.fill = "#f04a2f";
-      part.style.filter = "drop-shadow(0 0 6px rgba(240,74,47,.48))";
+      part.style.fill = index === 1 ? "#ff6542" : "#d93624";
+      part.style.filter = index === 1
+        ? "drop-shadow(0 0 8px rgba(255,72,42,.62))"
+        : "drop-shadow(0 0 5px rgba(217,54,36,.38))";
       part.style.transition = "fill .2s ease, filter .2s ease";
     });
   }, [active, spineReady]);
@@ -204,7 +206,7 @@ export default function Home() {
             <object
               ref={spineObject}
               className="spine-anatomy"
-              data="/spine-lateral.svg"
+              data="/spine-lateral.svg?v=red-1"
               type="image/svg+xml"
               aria-label="Human vertebral column, lateral view"
               onLoad={() => setSpineReady((value) => value + 1)}

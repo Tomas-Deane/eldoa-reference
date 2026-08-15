@@ -19,7 +19,7 @@
       <aside class="spine-nav">
         <div class="current"><span>NOW</span><strong>C2—C3</strong></div>
         <div class="spine-figure" aria-label="Interactive lateral view of the human spine">
-          <object class="spine-anatomy" data="spine-lateral.svg" type="image/svg+xml" aria-label="Human vertebral column, lateral view"></object>
+          <object class="spine-anatomy" data="spine-lateral.svg?v=red-1" type="image/svg+xml" aria-label="Human vertebral column, lateral view"></object>
           <div class="spine-levels"></div>
         </div>
         <p class="level-note">LEVEL 2 · LATERAL VIEW<br><span>Tap any articulation to jump</span></p>
@@ -78,8 +78,8 @@
     function updateSpine(id){
       currentSpineId=id;
       const doc=document.querySelector('.spine-anatomy').contentDocument;if(!doc)return;
-      doc.querySelectorAll('[data-spine-active]').forEach(part=>{part.style.fill='#999999';part.style.filter='';part.removeAttribute('data-spine-active')});
-      spineMap[id][1].forEach(partId=>{const part=doc.getElementById(partId);if(!part)return;part.setAttribute('data-spine-active','true');part.style.fill='#f04a2f';part.style.filter='drop-shadow(0 0 6px rgba(240,74,47,.48))';part.style.transition='fill .2s ease, filter .2s ease'});
+      doc.querySelectorAll('[data-spine-active]').forEach(part=>{part.style.fill='#8f817d';part.style.filter='';part.removeAttribute('data-spine-active')});
+      spineMap[id][1].forEach((partId,index)=>{const part=doc.getElementById(partId);if(!part)return;part.setAttribute('data-spine-active','true');part.style.fill=index===1?'#ff6542':'#d93624';part.style.filter=index===1?'drop-shadow(0 0 8px rgba(255,72,42,.62))':'drop-shadow(0 0 5px rgba(217,54,36,.38))';part.style.transition='fill .2s ease, filter .2s ease'});
     }
     function render(){
       const shown=list();
