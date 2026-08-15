@@ -16,6 +16,21 @@ type Pose = {
 
 const nwfVideo = (id: string) => `https://nwfeldoaonlinemembers.vhx.tv/nwf-eldoa-exercises/videos/${id}`;
 
+const spineMap: Record<string, { y: number; h: number }> = {
+  "c2-c3": { y: 6.1, h: 4.3 }, "c3-c4": { y: 8.7, h: 4.3 },
+  "c4-c5": { y: 11.3, h: 4.3 }, "c5-c6": { y: 14.0, h: 4.3 },
+  "c6-c7": { y: 16.6, h: 4.3 }, "c7-t1": { y: 18.6, h: 4.8 },
+  "t1-t2": { y: 21.3, h: 5.2 }, "t2-t3": { y: 24.1, h: 5.4 },
+  "t3-t4": { y: 27.8, h: 5.8 }, "t4-t5": { y: 30.8, h: 5.8 },
+  "t5-t6": { y: 34.2, h: 5.8 }, "t6-t7": { y: 37.7, h: 6.0 },
+  "t7-t8": { y: 42.0, h: 6.5 }, "t8-t9": { y: 45.8, h: 6.5 },
+  "t9-t10": { y: 49.8, h: 6.5 }, "t10-t11": { y: 53.4, h: 6.5 },
+  "t11-t12": { y: 57.4, h: 6.5 }, "t12-l1": { y: 61.2, h: 7.0 },
+  "l1-l2": { y: 65.4, h: 7.5 }, "l2-l3": { y: 69.4, h: 7.8 },
+  "l3-l4": { y: 74.0, h: 8.0 }, "l4-l5": { y: 79.3, h: 8.8 },
+  "l5-s1": { y: 84.4, h: 9.2 },
+};
+
 const poses: Pose[] = [
   { id: "c2-c3", upper: "C2", lower: "C3", region: "cervical", image: "/poses/c2-c3.avif", video: nwfVideo("c2-c3") },
   { id: "c3-c4", upper: "C3", lower: "C4", region: "cervical", image: "/poses/c3-c4.avif", video: nwfVideo("c3-c4") },
@@ -92,6 +107,7 @@ export default function Home() {
   }, [visible]);
 
   const jump = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "center" });
+  const activeSpine = spineMap[active] ?? spineMap["c2-c3"];
 
   return (
     <main>
@@ -152,18 +168,29 @@ export default function Home() {
             <span>NOW</span>
             <strong>{poses.find((pose) => pose.id === active)?.upper}—{poses.find((pose) => pose.id === active)?.lower}</strong>
           </div>
-          <div className="column-labels"><span>VERTEBRA</span><span>DISC</span></div>
-          <div className="vertebrae">
+          <div className="spine-figure" aria-label="Interactive lateral view of the human spine">
+            <img className="spine-anatomy" src="/spine-lateral.svg" alt="Human vertebral column, lateral view" />
+            <img
+              className="spine-anatomy spine-anatomy-active"
+              src="/spine-lateral.svg"
+              alt=""
+              aria-hidden="true"
+              style={{ clipPath: `inset(${Math.max(0, activeSpine.y - activeSpine.h / 2)}% 0 ${Math.max(0, 100 - activeSpine.y - activeSpine.h / 2)}% 0)` }}
+            />
             {visible.map((pose) => (
-              <button key={pose.id} onClick={() => jump(pose.id)} className={active === pose.id ? "active" : ""} aria-label={`Jump to ${pose.upper}–${pose.lower}`}>
-                <span className="bone">{pose.upper}</span>
-                <span className="disc" />
+              <button
+                key={pose.id}
+                onClick={() => jump(pose.id)}
+                className={`spine-level ${active === pose.id ? "active" : ""}`}
+                style={{ top: `${spineMap[pose.id].y}%` }}
+                aria-label={`Jump to ${pose.upper}–${pose.lower}`}
+              >
+                <span className="spine-tick" />
                 <span className="pair">{pose.upper}—{pose.lower}</span>
               </button>
             ))}
-            {visible.length > 0 && <div className="last-bone">{visible[visible.length - 1].lower}</div>}
           </div>
-          <p className="level-note">LEVEL 2<br /><span>Spine · L5/S1 to C2/C3</span></p>
+          <p className="level-note">LEVEL 2 · LATERAL VIEW<br /><span>Tap any articulation to jump</span></p>
         </aside>
       </div>
 
