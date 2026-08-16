@@ -56,7 +56,8 @@ h2 span { color: var(--signal); padding: 0 .08em; }
 .current span { font-size: 9px; color: var(--signal); }
 .current strong { font-size: 24px; letter-spacing: -.04em; }
 .spine-figure { position: relative; flex: 1; min-height: 0; margin: 14px 0 10px; overflow: hidden; }
-.spine-anatomy { position: absolute; inset: 0 auto 0 0; width: 44%; height: 100%; object-fit: contain; object-position: center; pointer-events: none; }
+.spine-anatomy { position: absolute; inset: 0 auto 0 0; width: 44%; height: 100%; pointer-events: none; }
+.spine-anatomy svg { display: block; width: 100%; height: 100%; }
 .spine-level { position: absolute; left: 39%; right: 0; height: 22px; transform: translateY(-50%); border: 0; padding: 0; background: transparent; display: grid; grid-template-columns: 30px 1fr; align-items: center; text-align: left; cursor: pointer; }
 .spine-tick { display: block; width: 18px; height: 1px; background: var(--line); transition: .18s ease; }
 .pair { font: 8px var(--font-geist-mono), monospace; letter-spacing: .03em; color: var(--muted); transition: .18s ease; }

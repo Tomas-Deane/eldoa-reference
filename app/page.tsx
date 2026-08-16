@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import spineSvg from "../public/spine-red.svg?raw";
 
 type Region = "cervical" | "thoracic" | "lumbar";
 
@@ -91,8 +92,7 @@ type Filter = (typeof filters)[number];
 export default function Home() {
   const [filter, setFilter] = useState<Filter>("All 23");
   const [active, setActive] = useState("c2-c3");
-  const [spineReady, setSpineReady] = useState(0);
-  const spineObject = useRef<HTMLObjectElement>(null);
+  const spineGraphic = useRef<HTMLDivElement>(null);
 
   const visible = useMemo(() => poses.filter((pose) => {
     if (filter === "Common 10") return pose.common;
@@ -103,14 +103,10 @@ export default function Home() {
   }), [filter]);
 
   useEffect(() => {
-    setActive(visible[0]?.id ?? "");
-  }, [visible]);
+    const graphic = spineGraphic.current;
+    if (!graphic) return;
 
-  useEffect(() => {
-    const document = spineObject.current?.contentDocument;
-    if (!document) return;
-
-    document.querySelectorAll("[data-spine-active]").forEach((element) => {
+    graphic.querySelectorAll("[data-spine-active]").forEach((element) => {
       const part = element as SVGElement;
       part.style.fill = "#8f817d";
       part.style.filter = "";
@@ -118,7 +114,7 @@ export default function Home() {
     });
 
     spineMap[active]?.parts.forEach((id, index) => {
-      const part = document.getElementById(id) as SVGElement | null;
+      const part = graphic.querySelector(`#${id}`) as SVGElement | null;
       if (!part) return;
       part.setAttribute("data-spine-active", "true");
       part.style.fill = index === 1 ? "#ff6542" : "#d93624";
@@ -127,7 +123,7 @@ export default function Home() {
         : "drop-shadow(0 0 5px rgba(217,54,36,.38))";
       part.style.transition = "fill .2s ease, filter .2s ease";
     });
-  }, [active, spineReady]);
+  }, [active]);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -143,6 +139,17 @@ export default function Home() {
   }, [visible]);
 
   const jump = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "center" });
+  const selectFilter = (name: Filter) => {
+    setFilter(name);
+    const first = poses.find((pose) => {
+      if (name === "Common 10") return pose.common;
+      if (name === "Cervical") return pose.region === "cervical";
+      if (name === "Thoracic") return pose.region === "thoracic";
+      if (name === "Lumbar") return pose.region === "lumbar";
+      return true;
+    });
+    setActive(first?.id ?? "");
+  };
   return (
     <main>
       <header className="masthead">
@@ -159,7 +166,7 @@ export default function Home() {
 
       <nav className="filters" aria-label="Exercise filters">
         {filters.map((name) => (
-          <button key={name} className={filter === name ? "selected" : ""} onClick={() => setFilter(name)}>{name}</button>
+          <button key={name} className={filter === name ? "selected" : ""} onClick={() => selectFilter(name)}>{name}</button>
         ))}
       </nav>
 
@@ -203,13 +210,12 @@ export default function Home() {
             <strong>{poses.find((pose) => pose.id === active)?.upper}—{poses.find((pose) => pose.id === active)?.lower}</strong>
           </div>
           <div className="spine-figure" aria-label="Interactive lateral view of the human spine">
-            <object
-              ref={spineObject}
+            <div
+              ref={spineGraphic}
               className="spine-anatomy"
-              data="/spine-red.svg"
-              type="image/svg+xml"
+              role="img"
               aria-label="Human vertebral column, lateral view"
-              onLoad={() => setSpineReady((value) => value + 1)}
+              dangerouslySetInnerHTML={{ __html: spineSvg }}
             />
             {visible.map((pose) => (
               <button
