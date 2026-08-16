@@ -206,7 +206,7 @@ export default function Home() {
             <object
               ref={spineObject}
               className="spine-anatomy"
-              data="/spine-lateral.svg?v=red-1"
+              data="/spine-red.svg"
               type="image/svg+xml"
               aria-label="Human vertebral column, lateral view"
               onLoad={() => setSpineReady((value) => value + 1)}
