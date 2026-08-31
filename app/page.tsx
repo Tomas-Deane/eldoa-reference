@@ -17,30 +17,41 @@ type Pose = {
 
 const nwfVideo = (id: string) => `https://nwfeldoaonlinemembers.vhx.tv/nwf-eldoa-exercises/videos/${id}`;
 
-const spineMap: Record<string, { y: number; parts: [string, string, string] }> = {
-  "c2-c3": { y: 6.1, parts: ["path52", "rect48", "path54"] },
-  "c3-c4": { y: 8.7, parts: ["path54", "rect46", "path56"] },
-  "c4-c5": { y: 11.4, parts: ["path56", "rect44", "path58"] },
-  "c5-c6": { y: 13.8, parts: ["path58", "path42", "path60"] },
-  "c6-c7": { y: 16.6, parts: ["path60", "path40", "path62"] },
-  "c7-t1": { y: 18.8, parts: ["path62", "path38", "path64"] },
-  "t1-t2": { y: 21.6, parts: ["path64", "path26", "path66"] },
-  "t2-t3": { y: 24.4, parts: ["path66", "path36", "path68"] },
-  "t3-t4": { y: 27.4, parts: ["path68", "path34", "path70"] },
-  "t4-t5": { y: 30.6, parts: ["path70", "path32", "path72"] },
-  "t5-t6": { y: 34.0, parts: ["path72", "path30", "path74"] },
-  "t6-t7": { y: 38.1, parts: ["path74", "path28", "path76"] },
-  "t7-t8": { y: 42.0, parts: ["path76", "rect24", "path78"] },
-  "t8-t9": { y: 45.9, parts: ["path78", "rect22", "path80"] },
-  "t9-t10": { y: 50.0, parts: ["path80", "rect20", "path82"] },
-  "t10-t11": { y: 53.6, parts: ["path82", "rect18", "path84"] },
-  "t11-t12": { y: 57.2, parts: ["path84", "rect16", "path86"] },
-  "t12-l1": { y: 61.1, parts: ["path86", "rect14", "path88"] },
-  "l1-l2": { y: 65.2, parts: ["path88", "rect12", "path90"] },
-  "l2-l3": { y: 69.6, parts: ["path90", "rect10", "path92"] },
-  "l3-l4": { y: 74.5, parts: ["path92", "rect8", "path94"] },
-  "l4-l5": { y: 79.4, parts: ["path94", "rect6", "path96"] },
-  "l5-s1": { y: 83.7, parts: ["path96", "rect4", "path98"] },
+const vertebraParts: Record<string, string[]> = {
+  C2: ["path52", "path104"], C3: ["path54", "path106"], C4: ["path56", "path108"],
+  C5: ["path58", "path110"], C6: ["path60", "path112"], C7: ["path62", "path114"],
+  T1: ["path64", "path116"], T2: ["path66", "path118"], T3: ["path68", "path120"],
+  T4: ["path70", "path122"], T5: ["path72", "path124"], T6: ["path74", "path126"],
+  T7: ["path76", "path128"], T8: ["path78", "path130"], T9: ["path80", "path132"],
+  T10: ["path82", "path134"], T11: ["path84", "path136"], T12: ["path86", "path138"],
+  L1: ["path88", "path140"], L2: ["path90", "path142"], L3: ["path92", "path144"],
+  L4: ["path94", "path146"], L5: ["path96", "path148"], S1: ["path98"],
+};
+
+const spineMap: Record<string, { y: number; upper: string; disc: string; lower: string }> = {
+  "c2-c3": { y: 6.1, upper: "C2", disc: "rect48", lower: "C3" },
+  "c3-c4": { y: 8.7, upper: "C3", disc: "rect46", lower: "C4" },
+  "c4-c5": { y: 11.4, upper: "C4", disc: "rect44", lower: "C5" },
+  "c5-c6": { y: 13.8, upper: "C5", disc: "path42", lower: "C6" },
+  "c6-c7": { y: 16.6, upper: "C6", disc: "path40", lower: "C7" },
+  "c7-t1": { y: 18.8, upper: "C7", disc: "path38", lower: "T1" },
+  "t1-t2": { y: 21.6, upper: "T1", disc: "path26", lower: "T2" },
+  "t2-t3": { y: 24.4, upper: "T2", disc: "path36", lower: "T3" },
+  "t3-t4": { y: 27.4, upper: "T3", disc: "path34", lower: "T4" },
+  "t4-t5": { y: 30.6, upper: "T4", disc: "path32", lower: "T5" },
+  "t5-t6": { y: 34.0, upper: "T5", disc: "path30", lower: "T6" },
+  "t6-t7": { y: 38.1, upper: "T6", disc: "path28", lower: "T7" },
+  "t7-t8": { y: 42.0, upper: "T7", disc: "rect24", lower: "T8" },
+  "t8-t9": { y: 45.9, upper: "T8", disc: "rect22", lower: "T9" },
+  "t9-t10": { y: 50.0, upper: "T9", disc: "rect20", lower: "T10" },
+  "t10-t11": { y: 53.6, upper: "T10", disc: "rect18", lower: "T11" },
+  "t11-t12": { y: 57.2, upper: "T11", disc: "rect16", lower: "T12" },
+  "t12-l1": { y: 61.1, upper: "T12", disc: "rect14", lower: "L1" },
+  "l1-l2": { y: 65.2, upper: "L1", disc: "rect12", lower: "L2" },
+  "l2-l3": { y: 69.6, upper: "L2", disc: "rect10", lower: "L3" },
+  "l3-l4": { y: 74.5, upper: "L3", disc: "rect8", lower: "L4" },
+  "l4-l5": { y: 79.4, upper: "L4", disc: "rect6", lower: "L5" },
+  "l5-s1": { y: 83.7, upper: "L5", disc: "rect4", lower: "S1" },
 };
 
 const poses: Pose[] = [
@@ -113,16 +124,25 @@ export default function Home() {
       part.removeAttribute("data-spine-active");
     });
 
-    spineMap[active]?.parts.forEach((id, index) => {
+    const articulation = spineMap[active];
+    if (!articulation) return;
+
+    [...vertebraParts[articulation.upper], ...vertebraParts[articulation.lower]].forEach((id) => {
       const part = graphic.querySelector(`#${id}`) as SVGElement | null;
       if (!part) return;
       part.setAttribute("data-spine-active", "true");
-      part.style.fill = index === 1 ? "#ff6542" : "#d93624";
-      part.style.filter = index === 1
-        ? "drop-shadow(0 0 8px rgba(255,72,42,.62))"
-        : "drop-shadow(0 0 5px rgba(217,54,36,.38))";
+      part.style.fill = "#d93624";
+      part.style.filter = "drop-shadow(0 0 5px rgba(217,54,36,.38))";
       part.style.transition = "fill .2s ease, filter .2s ease";
     });
+
+    const disc = graphic.querySelector(`#${articulation.disc}`) as SVGElement | null;
+    if (disc) {
+      disc.setAttribute("data-spine-active", "true");
+      disc.style.fill = "#ff6542";
+      disc.style.filter = "drop-shadow(0 0 8px rgba(255,72,42,.62))";
+      disc.style.transition = "fill .2s ease, filter .2s ease";
+    }
   }, [active]);
 
   useEffect(() => {
