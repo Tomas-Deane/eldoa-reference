@@ -42,7 +42,7 @@ export function SpineNavigator({ active, exercises, onSelect }: Props) {
 
   return (
     <aside className="spine-nav">
-      <div className="current"><span>NOW</span><strong>{active.upper}—{active.lower}</strong></div>
+      <div className="current"><strong>{active.upper}—{active.lower}</strong></div>
       <div className="spine-figure" aria-label="Interactive lateral view of the human spine">
         <div
           ref={graphic}
@@ -64,7 +64,7 @@ export function SpineNavigator({ active, exercises, onSelect }: Props) {
           </button>
         ))}
       </div>
-      <p className="level-note">LEVEL 2 · LATERAL VIEW<br /><span>Tap any articulation to jump</span></p>
+      <p className="level-note">LEVEL 2</p>
     </aside>
   );
 }

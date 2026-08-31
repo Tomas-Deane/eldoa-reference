@@ -82,7 +82,22 @@ export const filterExercises = (filter: Filter) => exercises.filter((item) => {
   return item.region === filter.toLowerCase();
 });
 
-export const references = [
+export type Reference = {
+  level: 3 | 4 | 5 | 6;
+  group: string;
+  name: string;
+  video?: string;
+  source?: string;
+};
+
+export const referenceLevels = [
+  { level: 3, title: "Peripheral joints", scope: "Hip · shoulder · ribs and sternum" },
+  { level: 4, title: "Pelvis", scope: "Sacroiliac joint · pubic symphysis · sacrum" },
+  { level: 5, title: "Upper cervical & TMJ", scope: "Lumbar pathologies · upper cervical spine · TMJ" },
+  { level: 6, title: "Cranial bones", scope: "Cranial-bone ELDOA" },
+] as const;
+
+export const references: Reference[] = [
   { level: 3, group: "Hip", name: "Hip joint · internal rotation", video: "https://www.youtube.com/watch?v=Oi2EEDXa0Dg", source: "Visual explanation" },
   { level: 3, group: "Hip", name: "Hip joint · external rotation", video: "https://www.youtube.com/watch?v=nW2qieeS2aI", source: "Position demonstration" },
   { level: 3, group: "Hip", name: "Hip joint · general", video: "https://www.youtube.com/watch?v=qAnc5YfvYKc", source: "Position demonstration" },
@@ -94,7 +109,9 @@ export const references = [
   { level: 4, group: "Pelvis", name: "General SI joint", video: "https://www.youtube.com/watch?v=GJXN4voK8oQ", source: "Position demonstration" },
   { level: 4, group: "Pelvis", name: "SI joint normalization", video: "https://www.youtube.com/watch?v=mK4j4K0b8kM", source: "Full class" },
   { level: 4, group: "Pelvis", name: "Sacroiliac sequence", video: "https://www.youtube.com/watch?v=OMS-d1ZOdSQ", source: "Sequence demonstration" },
+  { level: 4, group: "Pelvis", name: "Pubic symphysis" },
   { level: 5, group: "Upper cervical", name: "C0—C1—C2", video: "https://www.youtube.com/watch?v=3fBe9Q8Y3Ek", source: "Visual explanation" },
   { level: 5, group: "Upper cervical", name: "C1—C2", video: "https://www.youtube.com/watch?v=mpPJDI4hddA", source: "Position demonstration" },
   { level: 5, group: "TMJ", name: "Temporomandibular joint", video: "https://www.youtube.com/watch?v=OAJ5Xc7LdH8", source: "Assessment + ELDOA" },
-] as const;
+  { level: 6, group: "Cranial bones", name: "Cranial-bone ELDOA positions" },
+];

@@ -1,4 +1,4 @@
-# ELDOA Spinal Index
+# ELDOA Reference
 
 A minimal visual reference for spinal ELDOA exercises and the related video index.
 

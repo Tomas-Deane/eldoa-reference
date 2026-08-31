@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ELDOA — Spinal Index",
-  description: "A fast visual reference for the spinal ELDOA sequence from C2/C3 to L5/S1.",
+  title: "ELDOA Reference",
+  description: "A visual reference for spinal and joint-specific ELDOA exercises.",
   icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
 };
 

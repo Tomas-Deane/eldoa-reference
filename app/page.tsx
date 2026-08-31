@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
-import { filterExercises, filters, references } from "./atlas";
+import { filterExercises, filters, references, referenceLevels } from "./atlas";
 import type { Exercise, Filter } from "./atlas";
 import { SpineNavigator } from "./spine-navigator";
 
@@ -31,23 +31,34 @@ function ExerciseCard({ item, index, total }: { item: Exercise; index: number; t
 
 function ReferenceIndex() {
   return (
-    <section className="extended" id="levels-3-5">
+    <section className="extended" id="levels-3-6">
       <div className="extended-heading">
-        <div><p className="eyebrow">LEVELS 3—5 / VIDEO INDEX</p><h3>Beyond<br />the spine.</h3></div>
-        <p className="extended-intro">Confirmed ELDOA demonstrations. Each blank is ready for a final-position screenshot from the linked video.</p>
+        <div><p className="eyebrow">LEVELS 3—6</p><h3>Joint-specific<br />ELDOA.</h3></div>
       </div>
-      <div className="reference-grid">
-        {references.map((item, index) => (
-          <article className={`reference-card ${item.group === "TMJ" ? "featured" : ""}`} key={item.name}>
-            <div className="reference-blank"><span>SCREENSHOT NEEDED</span><b>{pad(index + 1)}</b></div>
-            <div className="reference-meta">
-              <p>LEVEL {item.level} · {item.group}</p><h4>{item.name}</h4>
-              <div><span>{item.source}</span><a href={item.video} target="_blank" rel="noreferrer">Open video ↗</a></div>
+      {referenceLevels.map(({ level, title, scope }) => {
+        const items = references.filter((item) => item.level === level);
+        return (
+          <section className="level-section" key={level}>
+            <header className="level-heading">
+              <p>LEVEL {level}</p><div><h4>{title}</h4><span>{scope}</span></div>
+            </header>
+            <div className="reference-grid">
+              {items.map((item, index) => (
+                <article className={`reference-card ${item.group === "TMJ" ? "featured" : ""}`} key={item.name}>
+                  <div className="reference-blank"><span>{item.video ? "SCREENSHOT NEEDED" : "REFERENCE NEEDED"}</span><b>{pad(index + 1)}</b></div>
+                  <div className="reference-meta">
+                    <p>{item.group}</p><h4>{item.name}</h4>
+                    <div>
+                      <span>{item.source ?? "REFERENCE NEEDED"}</span>
+                      {item.video && <a href={item.video} target="_blank" rel="noreferrer">Open video ↗</a>}
+                    </div>
+                  </div>
+                </article>
+              ))}
             </div>
-          </article>
-        ))}
-      </div>
-      <div className="unconfirmed"><span>NOT YET CONFIRMED</span><p>Level 4 · Pubic symphysis</p><p>Level 6 · Cranial-bone ELDOA positions</p></div>
+          </section>
+        );
+      })}
     </section>
   );
 }
@@ -81,8 +92,8 @@ export default function Home() {
   return (
     <main>
       <header className="masthead">
-        <div><p className="eyebrow">ELDOA / SPINAL INDEX</p><h1>One minute.<br />One articulation.</h1></div>
-        <div className="header-meta"><p><b>23</b> spinal levels</p><p><b>22</b> position references</p><p><b>01:00</b> each</p></div>
+        <div><p className="eyebrow">QUICK REFERENCE</p><h1>ELDOA<br />Reference.</h1></div>
+        <div className="header-meta"><p>1 minute per exercise</p></div>
       </header>
       <nav className="filters" aria-label="Exercise filters">
         {filters.map((name) => <button key={name} className={filter === name ? "selected" : ""} onClick={() => selectFilter(name)}>{name}</button>)}

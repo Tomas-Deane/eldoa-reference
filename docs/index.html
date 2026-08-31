@@ -3,32 +3,31 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ELDOA — Spinal Index</title>
-  <meta name="description" content="A fast visual reference for the spinal ELDOA sequence from C2/C3 to L5/S1.">
+  <title>ELDOA Reference</title>
+  <meta name="description" content="A visual reference for spinal and joint-specific ELDOA exercises.">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <main>
     <header class="masthead">
-      <div><p class="eyebrow">ELDOA / SPINAL INDEX</p><h1>One minute.<br>One articulation.</h1></div>
-      <div class="header-meta"><p><b>23</b> spinal levels</p><p><b>22</b> position references</p><p><b>01:00</b> each</p></div>
+      <div><p class="eyebrow">QUICK REFERENCE</p><h1>ELDOA<br>Reference.</h1></div>
+      <div class="header-meta"><p>1 minute per exercise</p></div>
     </header>
     <nav class="filters" aria-label="Exercise filters"></nav>
     <div class="layout">
       <section class="sequence" aria-live="polite"></section>
       <aside class="spine-nav">
-        <div class="current"><span>NOW</span><strong>C2—C3</strong></div>
+        <div class="current"><strong>C2—C3</strong></div>
         <div class="spine-figure" aria-label="Interactive lateral view of the human spine">
           <object class="spine-anatomy" data="spine-red.svg" type="image/svg+xml" aria-label="Human vertebral column, lateral view"></object>
           <div class="spine-levels"></div>
         </div>
-        <p class="level-note">LEVEL 2 · LATERAL VIEW<br><span>Tap any articulation to jump</span></p>
+        <p class="level-note">LEVEL 2</p>
       </aside>
     </div>
-    <section class="extended" id="levels-3-5">
-      <div class="extended-heading"><div><p class="eyebrow">LEVELS 3—5 / VIDEO INDEX</p><h3>Beyond<br>the spine.</h3></div><p class="extended-intro">Confirmed ELDOA demonstrations. Each blank is ready for a final-position screenshot from the linked video.</p></div>
-      <div class="reference-grid"></div>
-      <div class="unconfirmed"><span>NOT YET CONFIRMED</span><p>Level 4 · Pubic symphysis</p><p>Level 6 · Cranial-bone ELDOA positions</p></div>
+    <section class="extended" id="levels-3-6">
+      <div class="extended-heading"><div><p class="eyebrow">LEVELS 3—6</p><h3>Joint-specific<br>ELDOA.</h3></div></div>
+      <div class="reference-levels"></div>
     </section>
   </main>
   <script>
@@ -71,9 +70,17 @@
       [4,'Pelvis','General SI joint','https://www.youtube.com/watch?v=GJXN4voK8oQ','Position demonstration'],
       [4,'Pelvis','SI joint normalization','https://www.youtube.com/watch?v=mK4j4K0b8kM','Full class'],
       [4,'Pelvis','Sacroiliac sequence','https://www.youtube.com/watch?v=OMS-d1ZOdSQ','Sequence demonstration'],
+      [4,'Pelvis','Pubic symphysis'],
       [5,'Upper cervical','C0—C1—C2','https://www.youtube.com/watch?v=3fBe9Q8Y3Ek','Visual explanation'],
       [5,'Upper cervical','C1—C2','https://www.youtube.com/watch?v=mpPJDI4hddA','Position demonstration'],
-      [5,'TMJ','Temporomandibular joint','https://www.youtube.com/watch?v=OAJ5Xc7LdH8','Assessment + ELDOA']
+      [5,'TMJ','Temporomandibular joint','https://www.youtube.com/watch?v=OAJ5Xc7LdH8','Assessment + ELDOA'],
+      [6,'Cranial bones','Cranial-bone ELDOA positions']
+    ];
+    const referenceLevels=[
+      [3,'Peripheral joints','Hip · shoulder · ribs and sternum'],
+      [4,'Pelvis','Sacroiliac joint · pubic symphysis · sacrum'],
+      [5,'Upper cervical & TMJ','Lumbar pathologies · upper cervical spine · TMJ'],
+      [6,'Cranial bones','Cranial-bone ELDOA']
     ];
     const list=()=>poses.filter(p=>filter==='Common 10'?p[5]:['Cervical','Thoracic','Lumbar'].includes(filter)?p[3]===filter.toLowerCase():true);
     function updateSpine(id){
@@ -99,7 +106,10 @@
       shown.forEach(p=>observer.observe(document.getElementById(p[0])));
       const first=shown[0];document.querySelector(`[data-jump="${first[0]}"]`)?.classList.add('active');updateSpine(first[0]);
     }
-    document.querySelector('.reference-grid').innerHTML=extra.map((x,i)=>`<article class="reference-card ${x[1]==='TMJ'?'featured':''}"><div class="reference-blank"><span>SCREENSHOT NEEDED</span><b>${String(i+1).padStart(2,'0')}</b></div><div class="reference-meta"><p>LEVEL ${x[0]} · ${x[1]}</p><h4>${x[2]}</h4><div><span>${x[4]}</span><a href="${x[3]}" target="_blank" rel="noreferrer">Open video ↗</a></div></div></article>`).join('');
+    document.querySelector('.reference-levels').innerHTML=referenceLevels.map(level=>{
+      const items=extra.filter(x=>x[0]===level[0]);
+      return `<section class="level-section"><header class="level-heading"><p>LEVEL ${level[0]}</p><div><h4>${level[1]}</h4><span>${level[2]}</span></div></header><div class="reference-grid">${items.map((x,i)=>`<article class="reference-card ${x[1]==='TMJ'?'featured':''}"><div class="reference-blank"><span>${x[3]?'SCREENSHOT NEEDED':'REFERENCE NEEDED'}</span><b>${String(i+1).padStart(2,'0')}</b></div><div class="reference-meta"><p>${x[1]}</p><h4>${x[2]}</h4><div><span>${x[4]||'REFERENCE NEEDED'}</span>${x[3]?`<a href="${x[3]}" target="_blank" rel="noreferrer">Open video ↗</a>`:''}</div></div></article>`).join('')}</div></section>`;
+    }).join('');
     function animateAtlas(now){
       const doc=document.querySelector('.spine-anatomy').contentDocument;
       const reflection=(Math.sin(now/8000*Math.PI*2)+1)/2;
