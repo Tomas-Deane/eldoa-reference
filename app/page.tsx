@@ -18,14 +18,15 @@ type Pose = {
 const nwfVideo = (id: string) => `https://nwfeldoaonlinemembers.vhx.tv/nwf-eldoa-exercises/videos/${id}`;
 
 const vertebraParts: Record<string, string[]> = {
-  C2: ["path52", "path104"], C3: ["path54", "path106"], C4: ["path56", "path108"],
-  C5: ["path58", "path110"], C6: ["path60", "path112"], C7: ["path62", "path114"],
-  T1: ["path64", "path116"], T2: ["path66", "path118"], T3: ["path68", "path120"],
-  T4: ["path70", "path122"], T5: ["path72", "path124"], T6: ["path74", "path126"],
-  T7: ["path76", "path128"], T8: ["path78", "path130"], T9: ["path80", "path132"],
-  T10: ["path82", "path134"], T11: ["path84", "path136"], T12: ["path86", "path138"],
-  L1: ["path88", "path140"], L2: ["path90", "path142"], L3: ["path92", "path144"],
-  L4: ["path94", "path146"], L5: ["path96", "path148"], S1: ["path98"],
+  // Body paths begin at C2. Posterior paths begin one level earlier at C1 because the atlas has no body.
+  C2: ["path52", "path102"], C3: ["path54", "path104"], C4: ["path56", "path106"],
+  C5: ["path58", "path108"], C6: ["path60", "path110"], C7: ["path62", "path112"],
+  T1: ["path64", "path114"], T2: ["path66", "path116"], T3: ["path68", "path118"],
+  T4: ["path70", "path120"], T5: ["path72", "path122"], T6: ["path74", "path124"],
+  T7: ["path76", "path126"], T8: ["path78", "path128"], T9: ["path80", "path130"],
+  T10: ["path82", "path132"], T11: ["path84", "path134"], T12: ["path86", "path136"],
+  L1: ["path88", "path138"], L2: ["path90", "path140"], L3: ["path92", "path142"],
+  L4: ["path94", "path144"], L5: ["path96", "path146"], S1: ["path98", "path148"],
 };
 
 const spineMap: Record<string, { y: number; upper: string; disc: string; lower: string }> = {
