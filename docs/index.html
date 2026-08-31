@@ -100,7 +100,16 @@
       const first=shown[0];document.querySelector(`[data-jump="${first[0]}"]`)?.classList.add('active');updateSpine(first[0]);
     }
     document.querySelector('.reference-grid').innerHTML=extra.map((x,i)=>`<article class="reference-card ${x[1]==='TMJ'?'featured':''}"><div class="reference-blank"><span>SCREENSHOT NEEDED</span><b>${String(i+1).padStart(2,'0')}</b></div><div class="reference-meta"><p>LEVEL ${x[0]} · ${x[1]}</p><h4>${x[2]}</h4><div><span>${x[4]}</span><a href="${x[3]}" target="_blank" rel="noreferrer">Open video ↗</a></div></div></article>`).join('');
+    function animateAtlas(now){
+      const doc=document.querySelector('.spine-anatomy').contentDocument;
+      const reflection=(Math.sin(now/8000*Math.PI*2)+1)/2;
+      const sparkle=(Math.sin(now/9000*Math.PI*2)+1)/2;
+      doc?.getElementById('atlasGold')?.setAttribute('gradientTransform',`translate(${-52+reflection*104} 0)`);
+      doc?.getElementById('atlasLight')?.setAttribute('azimuth',String(195+sparkle*150));
+      requestAnimationFrame(animateAtlas);
+    }
     document.querySelector('.spine-anatomy').addEventListener('load',()=>updateSpine(currentSpineId));
+    requestAnimationFrame(animateAtlas);
     render();
   </script>
 </body>

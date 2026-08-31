@@ -15,6 +15,22 @@ export function SpineNavigator({ active, exercises, onSelect }: Props) {
   const graphic = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    let frame = 0;
+    const animate = (now: number) => {
+      const root = graphic.current;
+      const gradient = root?.querySelector("#atlasGold");
+      const light = root?.querySelector("#atlasLight");
+      const reflection = (Math.sin((now / 8000) * Math.PI * 2) + 1) / 2;
+      const sparkle = (Math.sin((now / 9000) * Math.PI * 2) + 1) / 2;
+      gradient?.setAttribute("gradientTransform", `translate(${-52 + reflection * 104} 0)`);
+      light?.setAttribute("azimuth", String(195 + sparkle * 150));
+      frame = requestAnimationFrame(animate);
+    };
+    frame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
+  useEffect(() => {
     const root = graphic.current;
     if (!root) return;
 

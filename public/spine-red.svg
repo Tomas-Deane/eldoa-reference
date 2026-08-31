@@ -32,7 +32,6 @@
       <stop offset="0.56" stop-color="#f3dfa0" />
       <stop offset="0.64" stop-color="#bd8d2c" />
       <stop offset="1" stop-color="#6d4710" />
-      <animateTransform attributeName="gradientTransform" type="translate" values="-52 0;52 0;-52 0" dur="8s" repeatCount="indefinite" />
     </linearGradient>
     <filter id="atlasMetal" filterUnits="userSpaceOnUse" x="165" y="-12" width="160" height="145" color-interpolation-filters="sRGB">
       <feTurbulence type="fractalNoise" baseFrequency="0.16" numOctaves="2" seed="12" result="grain" />
@@ -40,9 +39,7 @@
       <feColorMatrix in="clippedGrain" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 .18 0" result="fineGrain" />
       <feBlend in="SourceGraphic" in2="fineGrain" mode="soft-light" result="textured" />
       <feSpecularLighting in="clippedGrain" surfaceScale="2.4" specularConstant="0.72" specularExponent="24" lighting-color="#fff4c5" result="sparkle">
-        <feDistantLight azimuth="205" elevation="58">
-          <animate attributeName="azimuth" values="195;345;195" dur="9s" repeatCount="indefinite" />
-        </feDistantLight>
+        <feDistantLight id="atlasLight" azimuth="205" elevation="58" />
       </feSpecularLighting>
       <feComposite in="sparkle" in2="SourceAlpha" operator="in" result="clippedSparkle" />
       <feBlend in="textured" in2="clippedSparkle" mode="screen" result="lit" />
