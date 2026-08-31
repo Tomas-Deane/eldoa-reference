@@ -18,10 +18,10 @@ type Pose = {
 const nwfVideo = (id: string) => `https://nwfeldoaonlinemembers.vhx.tv/nwf-eldoa-exercises/videos/${id}`;
 
 const vertebraParts: Record<string, string[]> = {
-  // Body paths begin at C2. Posterior paths begin one level earlier at C1 because the atlas has no body.
-  C2: ["path52", "path102"], C3: ["path54", "path104"], C4: ["path56", "path106"],
-  C5: ["path58", "path108"], C6: ["path60", "path110"], C7: ["path62", "path112"],
-  T1: ["path64", "path114"], T2: ["path66", "path116"], T3: ["path68", "path118"],
+  // Posterior elements are separate SVG paths. path120 is a composite shared by T3 and T4.
+  C2: ["path52", "path104"], C3: ["path54", "path106"], C4: ["path56", "path108"],
+  C5: ["path58", "path110"], C6: ["path60", "path112"], C7: ["path62", "path114"],
+  T1: ["path64", "path116"], T2: ["path66", "path118"], T3: ["path68", "path120"],
   T4: ["path70", "path120"], T5: ["path72", "path122"], T6: ["path74", "path124"],
   T7: ["path76", "path126"], T8: ["path78", "path128"], T9: ["path80", "path130"],
   T10: ["path82", "path132"], T11: ["path84", "path134"], T12: ["path86", "path136"],
@@ -128,7 +128,7 @@ export default function Home() {
     const articulation = spineMap[active];
     if (!articulation) return;
 
-    [...vertebraParts[articulation.upper], ...vertebraParts[articulation.lower]].forEach((id) => {
+    new Set([...vertebraParts[articulation.upper], ...vertebraParts[articulation.lower]]).forEach((id) => {
       const part = graphic.querySelector(`#${id}`) as SVGElement | null;
       if (!part) return;
       part.setAttribute("data-spine-active", "true");
