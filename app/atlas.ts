@@ -102,7 +102,22 @@ export const exercises = [
       "Breathe in; breathe out.",
     ],
   }),
-  exercise("c6-c7", "C6", "C7", "cervical", 20.38, "path40"),
+  exercise("c6-c7", "C6", "C7", "cervical", 20.38, "path40", {
+    image: "/poses/c6-c7.png",
+    setup: [
+      "Tuck the pelvis back and maintain that fixed position: sacrum, belly button and lumbar spine flat against the floor.",
+      "Eyeballs stay down; back of the neck stays long. Lengthen through the crown of the head.",
+      "Bring both legs to tabletop, toes just above the knees. Pinky toes come back into eversion.",
+      "Bring the arms alongside the body into external rotation. Elbow creases face up; wrists extend.",
+    ],
+    hold: [
+      "Push the palms alongside the body, away from the head. Lengthen the head off the shoulders.",
+      "Create tension between the palms and the head.",
+      "Pull the toes back. Push the butt away from the head and the head away from the bottom.",
+      "Palms push down and away; shoulders maintain the tension.",
+      "Keep a soft jaw, eyes down and tail tucked. Breathe and maintain the long spine.",
+    ],
+  }),
   exercise("c7-t1", "C7", "T1", "cervical", 22.34, "path38", { common: true }),
   exercise("t1-t2", "T1", "T2", "thoracic", 24.76, "path26", { common: true }),
   exercise("t2-t3", "T2", "T3", "thoracic", 27.25, "path36"),
