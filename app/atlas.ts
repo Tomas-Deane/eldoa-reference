@@ -154,7 +154,22 @@ export const exercises = [
       "Take deep breaths. Reach the hands away and pull the toes back harder.",
     ],
   }),
-  exercise("t2-t3", "T2", "T3", "thoracic", 27.25, "path36"),
+  exercise("t2-t3", "T2", "T3", "thoracic", 27.25, "path36", {
+    image: "/poses/t2-t3.png",
+    setup: [
+      "Start in quadruped. Curl the toes under and sit the butt back almost into child’s pose.",
+      "Keep the tail tucked as you sit back.",
+      "Walk the hands out, maintaining external rotation.",
+      "Pull the wrists back and press the palms away while pushing the butt back.",
+      "Drop the head so it stays in line with the rest of the spine.",
+    ],
+    hold: [
+      "Push the crown of the head away. Push the butt away from the head and the head away from the butt.",
+      "Maintain maximum external rotation of the shoulder girdle; press the palms away.",
+      "Keep the tail tucked. Lengthen the back as the palms push forward and away.",
+      "Keep pushing the crown of the head away and the butt back.",
+    ],
+  }),
   exercise("t3-t4", "T3", "T4", "thoracic", 29.97, "path34"),
   exercise("t4-t5", "T4", "T5", "thoracic", 32.77, "path32", { common: true }),
   exercise("t5-t6", "T5", "T6", "thoracic", 35.84, "path30"),
