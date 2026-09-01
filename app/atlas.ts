@@ -170,7 +170,21 @@ export const exercises = [
       "Keep pushing the crown of the head away and the butt back.",
     ],
   }),
-  exercise("t3-t4", "T3", "T4", "thoracic", 29.97, "path34"),
+  exercise("t3-t4", "T3", "T4", "thoracic", 29.97, "path34", {
+    image: "/poses/t3-t4.png",
+    setup: [
+      "Start in quadruped: arms under the shoulder blades and knees under the hips. Flex the feet.",
+      "Tuck the tail. Push the butt back and the head away while maintaining a flat spine.",
+      "Stabilize through the right shoulder.",
+      "Externally rotate the left arm. Push the palm back and away, reaching the arm back by the hip.",
+    ],
+    hold: [
+      "Keep the head moving forward as the palm pushes back by the hip.",
+      "Do not rotate: maintain a straight spine and keep the tail tucked.",
+      "Separate the head and palm. Push the head off the shoulders and the palm away.",
+      "Stabilize through the opposite side. Breathe and lengthen.",
+    ],
+  }),
   exercise("t4-t5", "T4", "T5", "thoracic", 32.77, "path32", { common: true }),
   exercise("t5-t6", "T5", "T6", "thoracic", 35.84, "path30"),
   exercise("t6-t7", "T6", "T7", "thoracic", 39.46, "path28", { common: true }),
