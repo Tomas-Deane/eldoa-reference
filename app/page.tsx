@@ -18,9 +18,9 @@ function ExerciseCard({ item, index, total }: { item: Exercise; index: number; t
         <div><p className="region">{item.region}</p><h2>{item.upper}<span>—</span>{item.lower}</h2></div>
         <span className="minute">1:00</span>
       </div>
-      <div className={item.image ? `position-frame${item.id === "c2-c3" ? " source-frame" : ""}` : "position-frame missing"}>
+      <div className={item.image ? `position-frame${item.setup ? " source-frame" : ""}` : "position-frame missing"}>
         {item.image
-          ? <Image className={item.id === "c2-c3" ? "original" : undefined} src={item.image} alt={`Final position reference for ${pair} ELDOA`} fill sizes="(max-width: 900px) 100vw, calc(100vw - 400px)" />
+          ? <Image className={item.setup ? "original" : undefined} src={item.image} alt={`Final position reference for ${pair} ELDOA`} fill sizes="(max-width: 900px) 100vw, calc(100vw - 400px)" />
           : <div className="missing-copy"><span>REFERENCE NEEDED</span><strong>{pair}</strong><p>No still was present in the otherwise complete source set.</p></div>}
         <div className="target-tag"><i /> TARGET&nbsp; {pair}</div>
       </div>

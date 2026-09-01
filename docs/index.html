@@ -57,7 +57,15 @@
       't11-t12':[56.39,'T11','rect16','T12'],'t12-l1':[59.83,'T12','rect14','L1'],'l1-l2':[63.43,'L1','rect12','L2'],'l2-l3':[67.46,'L2','rect10','L3'],
       'l3-l4':[71.67,'L3','rect8','L4'],'l4-l5':[76.08,'L4','rect6','L5'],'l5-s1':[79.87,'L5','rect4','S1']
     };
-    const c2Guidance=`<div class="cue-sheet"><section><h3>Setup</h3><ol><li>Exhale: press the belly button down, reach the tailbone away, tuck the chin and lengthen the neck.</li><li>Bring both legs to tabletop, with the ankles slightly higher than the knees.</li><li>Grip the inside of the knees or shins. Use the hands to lift the head as high as possible.</li><li>Keep the chin tucked and slowly roll the neck toward the floor.</li></ol></section><section><h3>Hold</h3><ul><li>Reach the bone beneath the skull toward the wall behind you; keep the chin close to the chest.</li><li>Arms outside the hips, palms reaching past the hips. Pull the fingers and toes back.</li><li>Press the palms down, spread the fingers and reach the hands away. Push the back of the head toward the wall.</li></ul></section></div>`;
+    const cueSheet=(setup,hold)=>`<div class="cue-sheet"><section><h3>Setup</h3><ol>${setup.map(c=>`<li>${c}</li>`).join('')}</ol></section><section><h3>Hold</h3><ul>${hold.map(c=>`<li>${c}</li>`).join('')}</ul></section></div>`;
+    const guidance={
+      'c2-c3':cueSheet(
+        ['Exhale: press the belly button down, reach the tailbone away, tuck the chin and lengthen the neck.','Bring both legs to tabletop, with the ankles slightly higher than the knees.','Grip the inside of the knees or shins. Use the hands to lift the head as high as possible.','Keep the chin tucked and slowly roll the neck toward the floor.'],
+        ['Reach the bone beneath the skull toward the wall behind you; keep the chin close to the chest.','Arms outside the hips, palms reaching past the hips. Pull the fingers and toes back.','Press the palms down, spread the fingers and reach the hands away. Push the back of the head toward the wall.']),
+      't3-t4':cueSheet(
+        ['Take a deep breath. Press the belly button down into the ground.','As you breathe out, stabilize the pelvis and push the tailbone away from the head.','Pull the chin down to the ground; lengthen the back of the neck away and off the shoulders.','Bring both legs to tabletop, feet slightly higher than the knees. Knees shoulder-width—or two fists—apart.','Pull the pinky toes back toward the shins.'],
+        ['Hips push away; head pushes off the shoulders.','Externally rotate the arms. Fingers point toward the feet; shoulder blades lift off the ground.','Hands beside the knees, reaching toward the heels. Palms reach toward the feet; wrists pull back.','Eyes look down between the knees. Spread the fingers so the palms get tight.','Keep the belly button down, toes toward the shins and tailbone pushing away from the head.'])
+    };
     const filters=['All 23','Common 10','Cervical','Thoracic','Lumbar']; let filter='All 23', observer, currentSpineId='c2-c3';
     const extra=[
       [3,'Hip','Hip joint · internal rotation','https://www.youtube.com/watch?v=Oi2EEDXa0Dg','Visual explanation'],
@@ -97,8 +105,8 @@
       document.querySelector('.filters').innerHTML=filters.map(f=>`<button class="${f===filter?'selected':''}" data-filter="${f}">${f}</button>`).join('');
       document.querySelector('.sequence').innerHTML=shown.map((p,i)=>`<article class="pose" id="${p[0]}">
         <div class="pose-heading"><span class="count">${String(i+1).padStart(2,'0')} / ${String(shown.length).padStart(2,'0')}</span><div><p class="region">${p[3]}</p><h2>${p[1]}<span>—</span>${p[2]}</h2></div><span class="minute">1:00</span></div>
-        <div class="position-frame ${p[0]==='c5-c6'?'missing':p[0]==='c2-c3'?'source-frame':''}">${p[0]==='c5-c6'?`<div class="missing-copy"><span>REFERENCE NEEDED</span><strong>C5—C6</strong><p>No still was present in the otherwise complete source set.</p></div>`:`<img ${p[0]==='c2-c3'?'class="original"':''} src="poses/${p[0]}.${p[0]==='c2-c3'?'png':'avif'}" alt="Final position reference for ${p[1]}–${p[2]} ELDOA">`}<div class="target-tag"><i></i> TARGET&nbsp; ${p[1]}—${p[2]}</div></div>
-        ${p[0]==='c2-c3'?c2Guidance:''}
+        <div class="position-frame ${p[0]==='c5-c6'?'missing':guidance[p[0]]?'source-frame':''}">${p[0]==='c5-c6'?`<div class="missing-copy"><span>REFERENCE NEEDED</span><strong>C5—C6</strong><p>No still was present in the otherwise complete source set.</p></div>`:`<img ${guidance[p[0]]?'class="original"':''} src="poses/${p[0]}.${guidance[p[0]]?'png':'avif'}" alt="Final position reference for ${p[1]}–${p[2]} ELDOA">`}<div class="target-tag"><i></i> TARGET&nbsp; ${p[1]}—${p[2]}</div></div>
+        ${guidance[p[0]]??''}
         <div class="pose-footer"><p>Final position reference</p><a href="${p[4]}" target="_blank" rel="noreferrer">NWF exercise video ↗</a></div>
       </article>`).join('');
       document.querySelector('.spine-levels').innerHTML=shown.map(p=>`<button class="spine-level" style="top:${spineMap[p[0]][0]}%" data-jump="${p[0]}" aria-label="Jump to ${p[1]}–${p[2]}"><span class="spine-tick"></span><span class="pair">${p[1]}—${p[2]}</span></button>`).join('');
