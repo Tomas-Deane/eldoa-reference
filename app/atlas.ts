@@ -202,7 +202,21 @@ export const exercises = [
       "Breathe through the tension; keep pushing and lengthening.",
     ],
   }),
-  exercise("t5-t6", "T5", "T6", "thoracic", 35.84, "path30"),
+  exercise("t5-t6", "T5", "T6", "thoracic", 35.84, "path30", {
+    image: "/poses/t5-t6.png",
+    setup: [
+      "Start in quadruped: knees directly under the hips and hands directly under the shoulders. Bend the ankles.",
+      "Find a flat spine. Bring the chin back and lengthen from the back of the head to the tailbone.",
+      "Externally rotate the hands so the fingers point out to the sides.",
+      "Take the left arm up by the ear and reach it away.",
+    ],
+    hold: [
+      "Keep the head back and the spine as long as possible. Spread the fingers and breathe.",
+      "Keep the spine in a straight line. Reach the back of the head off the shoulders.",
+      "Reach the hand as far away from the tailbone as possible.",
+      "Stay straight without twisting the spine. Keep reaching away and take deep breaths.",
+    ],
+  }),
   exercise("t6-t7", "T6", "T7", "thoracic", 39.46, "path28", { common: true }),
   exercise("t7-t8", "T7", "T8", "thoracic", 42.95, "rect24"),
   exercise("t8-t9", "T8", "T9", "thoracic", 46.35, "rect22", { common: true }),
