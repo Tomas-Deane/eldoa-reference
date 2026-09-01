@@ -10,9 +10,11 @@ export type Exercise = {
   image?: string;
   video: string;
   common?: boolean;
+  setup?: string[];
+  hold?: string[];
 };
 
-type ExerciseOptions = { common?: boolean; image?: false };
+type ExerciseOptions = Pick<Partial<Exercise>, "common" | "setup" | "hold"> & { image?: false | string };
 
 const exercise = (
   id: string,
@@ -30,12 +32,25 @@ const exercise = (
   y,
   disc,
   common: options.common,
-  image: options.image === false ? undefined : `/poses/${id}.avif`,
+  image: options.image === false ? undefined : options.image ?? `/poses/${id}.avif`,
   video: `https://nwfeldoaonlinemembers.vhx.tv/nwf-eldoa-exercises/videos/${id}`,
 });
 
 export const exercises = [
-  exercise("c2-c3", "C2", "C3", "cervical", 11.06, "rect48"),
+  exercise("c2-c3", "C2", "C3", "cervical", 11.06, "rect48", {
+    image: "/poses/c2-c3.png",
+    setup: [
+      "Exhale: press the belly button down, reach the tailbone away, tuck the chin and lengthen the neck.",
+      "Bring both legs to tabletop, with the ankles slightly higher than the knees.",
+      "Grip the inside of the knees or shins. Use the hands to lift the head as high as possible.",
+      "Keep the chin tucked and slowly roll the neck toward the floor.",
+    ],
+    hold: [
+      "Reach the bone beneath the skull toward the wall behind you; keep the chin close to the chest.",
+      "Arms outside the hips, palms reaching past the hips. Pull the fingers and toes back.",
+      "Press the palms down, spread the fingers and reach the hands away. Push the back of the head toward the wall.",
+    ],
+  }),
   exercise("c3-c4", "C3", "C4", "cervical", 13.41, "rect46"),
   exercise("c4-c5", "C4", "C5", "cervical", 15.74, "rect44", { common: true }),
   exercise("c5-c6", "C5", "C6", "cervical", 17.89, "path42", { image: false }),

@@ -18,12 +18,16 @@ function ExerciseCard({ item, index, total }: { item: Exercise; index: number; t
         <div><p className="region">{item.region}</p><h2>{item.upper}<span>—</span>{item.lower}</h2></div>
         <span className="minute">1:00</span>
       </div>
-      <div className={item.image ? "position-frame" : "position-frame missing"}>
+      <div className={item.image ? `position-frame${item.id === "c2-c3" ? " source-frame" : ""}` : "position-frame missing"}>
         {item.image
-          ? <Image src={item.image} alt={`Final position reference for ${pair} ELDOA`} fill sizes="(max-width: 900px) 100vw, calc(100vw - 400px)" />
+          ? <Image className={item.id === "c2-c3" ? "original" : undefined} src={item.image} alt={`Final position reference for ${pair} ELDOA`} fill sizes="(max-width: 900px) 100vw, calc(100vw - 400px)" />
           : <div className="missing-copy"><span>REFERENCE NEEDED</span><strong>{pair}</strong><p>No still was present in the otherwise complete source set.</p></div>}
         <div className="target-tag"><i /> TARGET&nbsp; {pair}</div>
       </div>
+      {item.setup && item.hold && <div className="cue-sheet">
+        <section><h3>Setup</h3><ol>{item.setup.map((cue) => <li key={cue}>{cue}</li>)}</ol></section>
+        <section><h3>Hold</h3><ul>{item.hold.map((cue) => <li key={cue}>{cue}</li>)}</ul></section>
+      </div>}
       <div className="pose-footer"><p>Final position reference</p><a href={item.video} target="_blank" rel="noreferrer">NWF exercise video ↗</a></div>
     </article>
   );

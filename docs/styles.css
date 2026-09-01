@@ -37,6 +37,8 @@ h2 { margin: 0; font-size: clamp(48px, 7vw, 104px); line-height: .8; letter-spac
 h2 span { color: var(--signal); padding: 0 .08em; }
 .position-frame { height: min(64vh, 650px); min-height: 430px; background: #d8d6d0; position: relative; overflow: hidden; }
 .position-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.74) contrast(1.04); }
+.position-frame.source-frame { height: auto; min-height: 0; aspect-ratio: 16 / 9; background: #111; }
+.position-frame img.original { object-fit: contain; filter: none; }
 .position-frame::after { content: ""; position: absolute; inset: 0; box-shadow: inset 0 0 0 1px rgb(0 0 0 / .16); pointer-events: none; }
 .target-tag { position: absolute; left: 18px; bottom: 18px; padding: 9px 12px; background: var(--paper); font-family: var(--font-geist-mono), monospace; font-size: 10px; letter-spacing: .08em; }
 .target-tag i { display: inline-block; width: 7px; height: 7px; background: var(--signal); border-radius: 50%; margin-right: 7px; }
@@ -48,6 +50,11 @@ h2 span { color: var(--signal); padding: 0 .08em; }
 .pose-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 12px; font-size: 10px; color: var(--muted); }
 .pose-footer p { margin: 0; }
 .pose-footer a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--ink); padding-bottom: 2px; }
+.cue-sheet { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; padding: 24px 0 12px; border-bottom: 1px solid var(--line); }
+.cue-sheet section { display: grid; grid-template-columns: 58px 1fr; gap: 14px; }
+.cue-sheet h3 { margin: 3px 0 0; font: 500 10px/1.3 var(--font-geist-mono), monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--signal); }
+.cue-sheet ol, .cue-sheet ul { display: grid; gap: 9px; margin: 0; padding-left: 20px; font-size: 13px; line-height: 1.45; }
+.cue-sheet ul { list-style: square; }
 
 .spine-nav { position: sticky; top: 74px; height: calc(100vh - 86px); min-height: 610px; display: flex; flex-direction: column; padding-top: 18px; }
 .current { display: flex; align-items: baseline; justify-content: flex-end; border-bottom: 1px solid var(--ink); padding-bottom: 9px; }
@@ -107,6 +114,7 @@ h2 span { color: var(--signal); padding: 0 .08em; }
   .pose-heading { grid-template-columns: 1fr auto; }
   .count { display: none; }
   .pose-footer { gap: 15px; }
+  .cue-sheet { grid-template-columns: 1fr; gap: 18px; }
   .extended { padding-top: 100px; }
   .level-section { padding-top: 64px; }
   .level-heading { grid-template-columns: 1fr; gap: 16px; }
