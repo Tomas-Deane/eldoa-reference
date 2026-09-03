@@ -390,7 +390,24 @@ export const exercises = [
       "Keep the fingers spread and toes pulled back. Stay tall; do not let the ribs fall toward the hips.",
     ],
   }),
-  exercise("l4-l5", "L4", "L5", "lumbar", 76.08, "rect6", { common: true }),
+  exercise("l4-l5", "L4", "L5", "lumbar", 76.08, "rect6", {
+    common: true,
+    image: "/poses/l4-l5.png",
+    setup: [
+      "Sit upright with the knees bent about 90 degrees and the feet flat. Hold the shins.",
+      "Turn the arches down into the floor. Get as tall as possible, chin back and head reaching toward the ceiling.",
+      "Let the knees fall out to the sides, leaving about two fists’ width between the heels.",
+      "Flex the ankles and pull the toes toward the shins, pinky toes farther back. Press the arches down and knees toward the floor.",
+      "Reach the hands forward. Externally rotate the humerus so the elbow creases face the ceiling; spread the fingers.",
+    ],
+    hold: [
+      "Reach both hands overhead with the palms toward the sky.",
+      "Keep the spine tall in the gravity line and the fingers spread.",
+      "Push the knees toward the ground and pull the toes back as much as possible.",
+      "Look down toward the toes. Breathe, reach and stay tall.",
+      "Keep the knees going down as the hands and head reach up.",
+    ],
+  }),
   exercise("l5-s1", "L5", "S1", "lumbar", 79.87, "rect4", { common: true }),
 ];
 
