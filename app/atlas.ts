@@ -408,7 +408,24 @@ export const exercises = [
       "Keep the knees going down as the hands and head reach up.",
     ],
   }),
-  exercise("l5-s1", "L5", "S1", "lumbar", 79.87, "rect4", { common: true }),
+  exercise("l5-s1", "L5", "S1", "lumbar", 79.87, "rect4", {
+    common: true,
+    image: "/poses/l5-s1.png",
+    setup: [
+      "Sit as close to the wall as possible, then turn onto the back with both legs up the wall.",
+      "Place the feet about hip-width—or two fists—apart. Lay the spine flat.",
+      "Look toward the knees and push the crown of the head away to lengthen the back of the neck.",
+      "Dorsiflex from the tops of the ankles. Push the heels up while wedging the butt and sacrum down into the corner.",
+      "Internally rotate the legs so the knees come in. Add pseudo-inversion: big toes toward the knees, pinky toes away.",
+    ],
+    hold: [
+      "Keep the sacrum wedged down, heels pushing up and crown of the head reaching away.",
+      "Raise the arms in external rotation, palms up, then take them all the way overhead.",
+      "Push between the heels and palms. Maintain the tail tuck and lumbar contact with the ground.",
+      "Push the rib cage, armpits, elbows and palms away from the body as the legs lift up the wall.",
+      "Do not rotate the pelvis. Keep the femurs, legs and heels pushing up; eyes down and open, neck long.",
+    ],
+  }),
 ];
 
 export const vertebraParts: Record<string, [string, string]> = {
