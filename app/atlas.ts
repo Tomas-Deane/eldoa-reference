@@ -372,7 +372,24 @@ export const exercises = [
       "Breathe the rib cage up off the pelvis and lengthen through the crown of the head.",
     ],
   }),
-  exercise("l3-l4", "L3", "L4", "lumbar", 71.67, "rect8", { common: true }),
+  exercise("l3-l4", "L3", "L4", "lumbar", 71.67, "rect8", {
+    common: true,
+    image: "/poses/l3-l4.png",
+    setup: [
+      "Sit tall. From straight legs, bend the knees about 10–15 degrees and let them fall out to the sides.",
+      "Bring the feet together, leaving enough space to pass a credit card between the heels.",
+      "Find the gravity line: chest tall, chin back and head reaching toward the sky.",
+      "Push the knees down. Flex the ankles and pull the toes back, pinky toes harder toward the shins; press the arches toward the floor.",
+      "Reach the hands forward in external rotation, elbow creases toward the sky and fingers spread.",
+    ],
+    hold: [
+      "Breathe the rib cage up off the pelvis. Raise the hands, then open the arms about 45 degrees and push away.",
+      "Reach the hands toward the ceiling on lines extending from the belly button.",
+      "Keep the knees pushing down and the eyes looking toward the feet.",
+      "Push the head toward the ceiling and lengthen from the tailbone to the back of the head.",
+      "Keep the fingers spread and toes pulled back. Stay tall; do not let the ribs fall toward the hips.",
+    ],
+  }),
   exercise("l4-l5", "L4", "L5", "lumbar", 76.08, "rect6", { common: true }),
   exercise("l5-s1", "L5", "S1", "lumbar", 79.87, "rect4", { common: true }),
 ];
