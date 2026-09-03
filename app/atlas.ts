@@ -451,35 +451,32 @@ export const filterExercises = (filter: Filter) => exercises.filter((item) => {
 });
 
 export type Reference = {
-  level: 3 | 4 | 5 | 6;
+  level: 3 | 4 | 5;
   group: string;
   name: string;
-  video?: string;
-  source?: string;
+  video: string;
+  source: string;
 };
 
 export const referenceLevels = [
-  { level: 3, title: "Peripheral joints", scope: "Hip · shoulder · ribs and sternum" },
-  { level: 4, title: "Pelvis", scope: "Sacroiliac joint · pubic symphysis · sacrum" },
-  { level: 5, title: "Upper cervical & TMJ", scope: "Lumbar pathologies · upper cervical spine · TMJ" },
-  { level: 6, title: "Cranial bones", scope: "Cranial-bone ELDOA" },
+  { level: 3, title: "Peripheral joints", scope: "Coxo-femoral · shoulder complex · rib/sternal joints" },
+  { level: 4, title: "Pelvis", scope: "Sacroiliac joint · pubic symphysis · pelvic axes" },
+  { level: 5, title: "Spinal pathologies & TMJ", scope: "Lumbar · thoracic · cervical · TMJ" },
 ] as const;
 
 export const references: Reference[] = [
-  { level: 3, group: "Hip", name: "Hip joint · internal rotation", video: "https://www.youtube.com/watch?v=Oi2EEDXa0Dg", source: "Visual explanation" },
-  { level: 3, group: "Hip", name: "Hip joint · external rotation", video: "https://www.youtube.com/watch?v=nW2qieeS2aI", source: "Position demonstration" },
-  { level: 3, group: "Hip", name: "Hip joint · general", video: "https://www.youtube.com/watch?v=qAnc5YfvYKc", source: "Position demonstration" },
+  { level: 3, group: "Coxo-femoral", name: "Internal rotation", video: "https://www.youtube.com/watch?v=Oi2EEDXa0Dg", source: "Visual explanation" },
+  { level: 3, group: "Coxo-femoral", name: "External rotation", video: "https://www.youtube.com/watch?v=nW2qieeS2aI", source: "Position demonstration" },
+  { level: 3, group: "Coxo-femoral", name: "General hip ELDOA", video: "https://www.youtube.com/watch?v=qAnc5YfvYKc", source: "Position demonstration" },
   { level: 3, group: "Shoulder", name: "Shoulder girdle · multi-joint", video: "https://www.youtube.com/watch?v=QzkBCacMqv0", source: "Full class" },
   { level: 3, group: "Shoulder", name: "Scapular ELDOA", video: "https://www.youtube.com/shorts/KmUzBqkMUpU", source: "Short demonstration" },
-  { level: 3, group: "Rib", name: "Rib 6", video: "https://www.youtube.com/watch?v=TY1ib5tCkww", source: "Position demonstration" },
-  { level: 3, group: "Rib", name: "Rib 8", video: "https://www.youtube.com/watch?v=2XywEIqyEJc", source: "Position demonstration" },
-  { level: 3, group: "Rib", name: "Rib 10", video: "https://www.youtube.com/watch?v=9T-EDHVzFdM", source: "Position demonstration" },
-  { level: 4, group: "Pelvis", name: "General SI joint", video: "https://www.youtube.com/watch?v=GJXN4voK8oQ", source: "Position demonstration" },
-  { level: 4, group: "Pelvis", name: "SI joint normalization", video: "https://www.youtube.com/watch?v=mK4j4K0b8kM", source: "Full class" },
-  { level: 4, group: "Pelvis", name: "Sacroiliac sequence", video: "https://www.youtube.com/watch?v=OMS-d1ZOdSQ", source: "Sequence demonstration" },
-  { level: 4, group: "Pelvis", name: "Pubic symphysis" },
+  { level: 3, group: "Rib / sternum", name: "Rib 6", video: "https://www.youtube.com/watch?v=TY1ib5tCkww", source: "Position demonstration" },
+  { level: 3, group: "Rib / sternum", name: "Rib 8", video: "https://www.youtube.com/watch?v=2XywEIqyEJc", source: "Position demonstration" },
+  { level: 3, group: "Rib / sternum", name: "Rib 10", video: "https://www.youtube.com/watch?v=9T-EDHVzFdM", source: "Position demonstration" },
+  { level: 4, group: "Sacroiliac joint", name: "General SI-joint ELDOA", video: "https://www.youtube.com/watch?v=GJXN4voK8oQ", source: "Position demonstration" },
+  { level: 4, group: "Sacroiliac joint", name: "SI-joint normalization", video: "https://www.youtube.com/watch?v=mK4j4K0b8kM", source: "Full class" },
+  { level: 4, group: "Sacroiliac joint", name: "Sacroiliac ELDOA sequence", video: "https://www.youtube.com/watch?v=OMS-d1ZOdSQ", source: "Sequence demonstration" },
   { level: 5, group: "Upper cervical", name: "C0—C1—C2", video: "https://www.youtube.com/watch?v=3fBe9Q8Y3Ek", source: "Visual explanation" },
   { level: 5, group: "Upper cervical", name: "C1—C2", video: "https://www.youtube.com/watch?v=mpPJDI4hddA", source: "Position demonstration" },
   { level: 5, group: "TMJ", name: "Temporomandibular joint", video: "https://www.youtube.com/watch?v=OAJ5Xc7LdH8", source: "Assessment + ELDOA" },
-  { level: 6, group: "Cranial bones", name: "Cranial-bone ELDOA positions" },
 ];

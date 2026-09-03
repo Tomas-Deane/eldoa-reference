@@ -35,9 +35,9 @@ function ExerciseCard({ item, index, total }: { item: Exercise; index: number; t
 
 function ReferenceIndex() {
   return (
-    <section className="extended" id="levels-3-6">
+    <section className="extended" id="levels-3-5">
       <div className="extended-heading">
-        <div><p className="eyebrow">LEVELS 3—6</p><h3>Joint-specific<br />ELDOA.</h3></div>
+        <div><p className="eyebrow">LEVELS 3—5</p><h3>Peripheral joints,<br />pelvis &amp; TMJ.</h3></div>
       </div>
       {referenceLevels.map(({ level, title, scope }) => {
         const items = references.filter((item) => item.level === level);
@@ -49,12 +49,12 @@ function ReferenceIndex() {
             <div className="reference-grid">
               {items.map((item, index) => (
                 <article className={`reference-card ${item.group === "TMJ" ? "featured" : ""}`} key={item.name}>
-                  <div className="reference-blank"><span>{item.video ? "SCREENSHOT NEEDED" : "REFERENCE NEEDED"}</span><b>{pad(index + 1)}</b></div>
+                  <div className="reference-blank"><span>SCREENSHOT NEEDED</span><b>{pad(index + 1)}</b></div>
                   <div className="reference-meta">
                     <p>{item.group}</p><h4>{item.name}</h4>
                     <div>
-                      <span>{item.source ?? "REFERENCE NEEDED"}</span>
-                      {item.video && <a href={item.video} target="_blank" rel="noreferrer">Open video ↗</a>}
+                      <span>{item.source}</span>
+                      <a href={item.video} target="_blank" rel="noreferrer">Open video ↗</a>
                     </div>
                   </div>
                 </article>

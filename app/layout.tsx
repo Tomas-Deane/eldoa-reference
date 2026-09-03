@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "ELDOA Reference",
-  description: "A visual reference for spinal and joint-specific ELDOA exercises.",
+  description: "A visual reference for spinal, peripheral-joint, pelvic, upper-cervical and TMJ ELDOA exercises.",
   icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
 };
 
