@@ -131,6 +131,7 @@
     };
     const filters=['All','Level 1','Level 2']; let filter='All', observer, currentSpineId='c2-c3';
     const levelOne=new Set(['c4-c5','t6-t7','t8-t9','l5-s1']);
+    const labelY=y=>45.47+(y-45.47)*.95;
     const extra=[
       [3,'Coxo-femoral','Internal rotation','https://www.youtube.com/watch?v=Oi2EEDXa0Dg','Visual explanation'],
       [3,'Coxo-femoral','External rotation','https://www.youtube.com/watch?v=nW2qieeS2aI','Position demonstration'],
@@ -171,7 +172,7 @@
         ${guidance[p[0]]??''}
         <div class="pose-footer"><p>Final position reference</p><a href="${p[4]}" target="_blank" rel="noreferrer">NWF exercise video ↗</a></div>
       </article>`).join('');
-      document.querySelector('.spine-levels').innerHTML=shown.map(p=>`<button class="spine-level" style="top:${spineMap[p[0]][0]}%" data-jump="${p[0]}" aria-label="Jump to ${p[1]}–${p[2]}"><span class="spine-tick"></span><span class="pair">${p[1]}—${p[2]}</span></button>`).join('');
+      document.querySelector('.spine-levels').innerHTML=shown.map(p=>`<button class="spine-level" style="top:${labelY(spineMap[p[0]][0])}%" data-jump="${p[0]}" aria-label="Jump to ${p[1]}–${p[2]}"><span class="spine-tick"></span><span class="pair">${p[1]}—${p[2]}</span></button>`).join('');
       document.querySelectorAll('[data-filter]').forEach(b=>b.onclick=()=>{filter=b.dataset.filter;render();scrollTo({top:document.querySelector('.filters').offsetTop,behavior:'smooth'})});
       document.querySelectorAll('[data-jump]').forEach(b=>b.onclick=()=>document.getElementById(b.dataset.jump).scrollIntoView({behavior:'smooth',block:'center'}));
       observer?.disconnect(); observer=new IntersectionObserver(entries=>{const e=entries.filter(x=>x.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];if(!e)return;document.querySelectorAll('.spine-level').forEach(b=>b.classList.toggle('active',b.dataset.jump===e.target.id));const p=poses.find(x=>x[0]===e.target.id);document.querySelector('.current strong').textContent=p[1]+'—'+p[2];document.querySelector('.level-note').textContent=`LEVEL ${levelOne.has(p[0])?1:2}`;updateSpine(p[0])},{rootMargin:'-25% 0px -55% 0px',threshold:[.05,.35,.7]});

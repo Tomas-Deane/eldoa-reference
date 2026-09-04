@@ -11,6 +11,8 @@ type Props = {
   onSelect: (id: string) => void;
 };
 
+const labelY = (y: number) => 45.47 + (y - 45.47) * 0.95;
+
 export function SpineNavigator({ active, exercises, onSelect }: Props) {
   const graphic = useRef<HTMLDivElement>(null);
 
@@ -56,7 +58,7 @@ export function SpineNavigator({ active, exercises, onSelect }: Props) {
             key={item.id}
             onClick={() => onSelect(item.id)}
             className={`spine-level ${active.id === item.id ? "active" : ""}`}
-            style={{ top: `${item.y}%` }}
+            style={{ top: `${labelY(item.y)}%` }}
             aria-label={`Jump to ${item.upper}–${item.lower}`}
           >
             <span className="spine-tick" />
