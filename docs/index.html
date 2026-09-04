@@ -129,7 +129,8 @@
         ['Sit as close to the wall as possible, then turn onto the back with both legs up the wall.','Place the feet about hip-width—or two fists—apart. Lay the spine flat.','Look toward the knees and push the crown of the head away to lengthen the back of the neck.','Dorsiflex from the tops of the ankles. Push the heels up while wedging the butt and sacrum down into the corner.','Internally rotate the legs so the knees come in. Add pseudo-inversion: big toes toward the knees, pinky toes away.'],
         ['Keep the sacrum wedged down, heels pushing up and crown of the head reaching away.','Raise the arms in external rotation, palms up, then take them all the way overhead.','Push between the heels and palms. Maintain the tail tuck and lumbar contact with the ground.','Push the rib cage, armpits, elbows and palms away from the body as the legs lift up the wall.','Do not rotate the pelvis. Keep the femurs, legs and heels pushing up; eyes down and open, neck long.'])
     };
-    const filters=['All 23','Common 10','Cervical','Thoracic','Lumbar']; let filter='All 23', observer, currentSpineId='c2-c3';
+    const filters=['All','Level 1','Level 2']; let filter='All', observer, currentSpineId='c2-c3';
+    const levelOne=new Set(['c4-c5','t6-t7','t8-t9','l5-s1']);
     const extra=[
       [3,'Coxo-femoral','Internal rotation','https://www.youtube.com/watch?v=Oi2EEDXa0Dg','Visual explanation'],
       [3,'Coxo-femoral','External rotation','https://www.youtube.com/watch?v=nW2qieeS2aI','Position demonstration'],
@@ -151,7 +152,7 @@
       [4,'Pelvis','Sacroiliac joint · pubic symphysis · pelvic axes'],
       [5,'Spinal pathologies & TMJ','Lumbar · thoracic · cervical · TMJ']
     ];
-    const list=()=>poses.filter(p=>filter==='Common 10'?p[5]:['Cervical','Thoracic','Lumbar'].includes(filter)?p[3]===filter.toLowerCase():true);
+    const list=()=>poses.filter(p=>filter==='All'||(filter==='Level 1'?levelOne.has(p[0]):!levelOne.has(p[0])));
     function updateSpine(id){
       currentSpineId=id;
       const doc=document.querySelector('.spine-anatomy').contentDocument;if(!doc)return;
@@ -162,6 +163,7 @@
     }
     function render(){
       const shown=list();
+      document.querySelector('.level-note').textContent=`LEVEL ${levelOne.has(shown[0][0])?1:2}`;
       document.querySelector('.filters').innerHTML=filters.map(f=>`<button class="${f===filter?'selected':''}" data-filter="${f}">${f}</button>`).join('');
       document.querySelector('.sequence').innerHTML=shown.map((p,i)=>`<article class="pose" id="${p[0]}">
         <div class="pose-heading"><span class="count">${String(i+1).padStart(2,'0')} / ${String(shown.length).padStart(2,'0')}</span><div><p class="region">${p[3]}</p><h2>${p[1]}<span>—</span>${p[2]}</h2></div><span class="minute">1:00</span></div>
@@ -172,7 +174,7 @@
       document.querySelector('.spine-levels').innerHTML=shown.map(p=>`<button class="spine-level" style="top:${spineMap[p[0]][0]}%" data-jump="${p[0]}" aria-label="Jump to ${p[1]}–${p[2]}"><span class="spine-tick"></span><span class="pair">${p[1]}—${p[2]}</span></button>`).join('');
       document.querySelectorAll('[data-filter]').forEach(b=>b.onclick=()=>{filter=b.dataset.filter;render();scrollTo({top:document.querySelector('.filters').offsetTop,behavior:'smooth'})});
       document.querySelectorAll('[data-jump]').forEach(b=>b.onclick=()=>document.getElementById(b.dataset.jump).scrollIntoView({behavior:'smooth',block:'center'}));
-      observer?.disconnect(); observer=new IntersectionObserver(entries=>{const e=entries.filter(x=>x.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];if(!e)return;document.querySelectorAll('.spine-level').forEach(b=>b.classList.toggle('active',b.dataset.jump===e.target.id));const p=poses.find(x=>x[0]===e.target.id);document.querySelector('.current strong').textContent=p[1]+'—'+p[2];updateSpine(p[0])},{rootMargin:'-25% 0px -55% 0px',threshold:[.05,.35,.7]});
+      observer?.disconnect(); observer=new IntersectionObserver(entries=>{const e=entries.filter(x=>x.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];if(!e)return;document.querySelectorAll('.spine-level').forEach(b=>b.classList.toggle('active',b.dataset.jump===e.target.id));const p=poses.find(x=>x[0]===e.target.id);document.querySelector('.current strong').textContent=p[1]+'—'+p[2];document.querySelector('.level-note').textContent=`LEVEL ${levelOne.has(p[0])?1:2}`;updateSpine(p[0])},{rootMargin:'-25% 0px -55% 0px',threshold:[.05,.35,.7]});
       shown.forEach(p=>observer.observe(document.getElementById(p[0])));
       const first=shown[0];document.querySelector(`[data-jump="${first[0]}"]`)?.classList.add('active');updateSpine(first[0]);
     }

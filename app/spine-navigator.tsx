@@ -64,7 +64,7 @@ export function SpineNavigator({ active, exercises, onSelect }: Props) {
           </button>
         ))}
       </div>
-      <p className="level-note">LEVEL 2</p>
+      <p className="level-note">LEVEL {active.level}</p>
     </aside>
   );
 }
