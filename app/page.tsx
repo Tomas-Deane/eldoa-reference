@@ -68,7 +68,7 @@ function ReferenceIndex() {
 }
 
 export default function Home() {
-  const [filter, setFilter] = useState<Filter>("All 23");
+  const [filter, setFilter] = useState<Filter>("All");
   const visible = useMemo(() => filterExercises(filter), [filter]);
   const [activeId, setActiveId] = useState(visible[0].id);
   const active = visible.find((item) => item.id === activeId) ?? visible[0];

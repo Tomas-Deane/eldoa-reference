@@ -9,12 +9,12 @@ export type Exercise = {
   disc: string;
   image?: string;
   video: string;
-  common?: boolean;
+  level: 1 | 2;
   setup?: string[];
   hold?: string[];
 };
 
-type ExerciseOptions = Pick<Partial<Exercise>, "common" | "setup" | "hold"> & { image?: false | string };
+type ExerciseOptions = Pick<Partial<Exercise>, "setup" | "hold"> & { image?: false | string; level?: 1 };
 
 const exercise = (
   id: string,
@@ -31,7 +31,7 @@ const exercise = (
   region,
   y,
   disc,
-  common: options.common,
+  level: options.level ?? 2,
   image: options.image === false ? undefined : options.image ?? `/poses/${id}.avif`,
   video: `https://nwfeldoaonlinemembers.vhx.tv/nwf-eldoa-exercises/videos/${id}`,
 });
@@ -69,7 +69,7 @@ export const exercises = [
     ],
   }),
   exercise("c4-c5", "C4", "C5", "cervical", 15.74, "rect44", {
-    common: true,
+    level: 1,
     image: "/poses/c4-c5.png",
     setup: [
       "Take a deep breath. As you exhale, push the belly button down into the ground and stabilize the pelvis.",
@@ -119,7 +119,6 @@ export const exercises = [
     ],
   }),
   exercise("c7-t1", "C7", "T1", "cervical", 22.34, "path38", {
-    common: true,
     image: "/poses/c7-t1.png",
     setup: [
       "Push the belly button down into the ground; make the spine as flat to the floor as possible.",
@@ -137,7 +136,6 @@ export const exercises = [
     ],
   }),
   exercise("t1-t2", "T1", "T2", "thoracic", 24.76, "path26", {
-    common: true,
     image: "/poses/t1-t2.png",
     setup: [
       "Push the belly button down into the ground. Bring the chin down and lengthen the neck away from the shoulders.",
@@ -186,7 +184,6 @@ export const exercises = [
     ],
   }),
   exercise("t4-t5", "T4", "T5", "thoracic", 32.77, "path32", {
-    common: true,
     image: "/poses/t4-t5.png",
     setup: [
       "Start in quadruped: hands directly under the shoulders and knees under the hips.",
@@ -218,7 +215,7 @@ export const exercises = [
     ],
   }),
   exercise("t6-t7", "T6", "T7", "thoracic", 39.46, "path28", {
-    common: true,
+    level: 1,
     image: "/poses/t6-t7.png",
     setup: [
       "Sit cross-legged, crossing the legs or ankles. Use pads if needed; extend the legs if hip or knee motion is limited.",
@@ -252,7 +249,7 @@ export const exercises = [
     ],
   }),
   exercise("t8-t9", "T8", "T9", "thoracic", 46.35, "rect22", {
-    common: true,
+    level: 1,
     image: "/poses/t8-t9.png",
     setup: [
       "Sit with both knees bent, vertical and parallel, pointing toward the ceiling. Keep the arches flat on the ground.",
@@ -321,7 +318,6 @@ export const exercises = [
     ],
   }),
   exercise("t12-l1", "T12", "L1", "thoracic", 59.83, "rect14", {
-    common: true,
     image: "/poses/t12-l1.png",
     setup: [
       "Sit on pads if needed. Bend both knees, rock the pelvis and establish a tall gravity line; cheekbones over collarbones and head toward the sky.",
@@ -373,7 +369,6 @@ export const exercises = [
     ],
   }),
   exercise("l3-l4", "L3", "L4", "lumbar", 71.67, "rect8", {
-    common: true,
     image: "/poses/l3-l4.png",
     setup: [
       "Sit tall. From straight legs, bend the knees about 10–15 degrees and let them fall out to the sides.",
@@ -391,7 +386,6 @@ export const exercises = [
     ],
   }),
   exercise("l4-l5", "L4", "L5", "lumbar", 76.08, "rect6", {
-    common: true,
     image: "/poses/l4-l5.png",
     setup: [
       "Sit upright with the knees bent about 90 degrees and the feet flat. Hold the shins.",
@@ -409,7 +403,7 @@ export const exercises = [
     ],
   }),
   exercise("l5-s1", "L5", "S1", "lumbar", 79.87, "rect4", {
-    common: true,
+    level: 1,
     image: "/poses/l5-s1.png",
     setup: [
       "Sit as close to the wall as possible, then turn onto the back with both legs up the wall.",
@@ -441,13 +435,12 @@ export const vertebraParts: Record<string, [string, string]> = {
   L4: ["path94", "path144"], L5: ["path96", "path146"], S1: ["path98", "path148"],
 };
 
-export const filters = ["All 23", "Common 10", "Cervical", "Thoracic", "Lumbar"] as const;
+export const filters = ["All", "Level 1", "Level 2"] as const;
 export type Filter = (typeof filters)[number];
 
 export const filterExercises = (filter: Filter) => exercises.filter((item) => {
-  if (filter === "All 23") return true;
-  if (filter === "Common 10") return item.common;
-  return item.region === filter.toLowerCase();
+  if (filter === "All") return true;
+  return item.level === Number(filter.at(-1));
 });
 
 export type Reference = {
